@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{AdminTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Utilisateurs</title>
+</head>
+
+<body>
+
+   <div layout:fragment="content">
+     <br>
+     <br>
+     <br>
+     <div class="container">
+     <!-- 
+      <h3 style="text-align: center; color: blue;">Les Listes des  Etudiants</h3> 
+      <br>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>id</th><th>Action</th> 
+                    </tr>
+                    <tr th:each="e:${listeutilisateurs}">
+                    <td th:text="${e.id}"></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/deleteu(id=${e.id})}">supprimer</a></td>
+                    </tr>
+       </table>
+       -->
+      <h3 style="text-align: center; color: blue;">Les Listes des Conseillers</h3>
+      <br>
+      <br>
+      
+      <table class="table table-striped">
+                    <tr>
+                    <th>idUtilisateur</th><th>SecteurOrientation</th><th>etablissement</th><th>Nom Complet</th><th>Etat</th><th>Email</th><th>Nom Utilisateur</th><th>Action</th>
+                    </tr>
+                    <tr th:each="c:${listConseiller}">
+                    <td th:text="${c.id_utilisateur}"></td>
+                    <td th:text="${c.libelles}"></td> 
+                    <td th:text="${c.libellee}"></td> 
+                    <td th:text="${c.nom_complet}"></td>
+                    <td th:if="${c.isaprouv}">
+                    Approuvé
+                    </td>
+                    <!-- ELSE -->
+                    <td th:unless="${c.isaprouv}">
+                    <a th:href="@{/admin/approuv/{id}(id=${c.id_utilisateur})}" class="btn btn-primary">Approuver</a>
+                    </td>
+                    <td th:text="${c.email}"></td>
+                    <td th:text="${c.nom_utilisateur}"></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deletec/{id}(id=${c.id_utilisateur})}">supprimer</a></td>
+                    </tr>
+      </table>
+      <br>
+      <h3 style="text-align: center; color: blue;">Les Listes des  Etudiants</h3>
+      <br>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>idUtilisateur</th><th>NiveauScolaire</th><th>Etablissement</th><th>Nom Complet</th><th>Email</th><th>Nom Utilisateur</th><th>Action</th> 
+                    </tr>
+                    <tr th:each="e:${listEtudiant}">
+                    <td th:text="${e.id_utilisateur}"></td>
+                    <td th:text="${e.libellee}"></td>
+                    <td th:text="${e.libellen}"></td>
+                    <td th:text="${e.nom_complet}"></td>
+                    <td th:text="${e.email}"></td>
+                    <td th:text="${e.nom_utilisateur}"></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deletee/{id}(id=${e.id_utilisateur})}">supprimer</a></td>
+                    </tr>
+       </table>
+ </div>
+</div>
+</body>
+</html>

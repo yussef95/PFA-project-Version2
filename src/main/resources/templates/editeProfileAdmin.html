@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{AdminTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Editer mon profile</title>
+<style type="text/css">
+h2{
+color: blue;
+}
+label {
+	color: blue;
+}
+
+</style>
+</head>
+<body>
+
+ <div layout:fragment="content">
+
+<div class="container">
+  <h2>Editer mon profile</h2>
+  <form th:action="@{/admin/editeProfileA/{id}(id=${admin.id})}" method="post">
+    <div class="form-group">
+      <label for="titre">email:</label>
+      <input type="text" class="form-control" id="email" th:value="${admin.email}"   name="email">
+    </div>
+    <div class="form-group">
+      <label for="nomUtilisateur">nom Utilisateur:</label>
+      <input type="text" class="form-control" id="nomUtilisateur" th:value="${admin.nomUtilisateur}"  name="nomUtilisateur">
+    </div>
+    <button type="submit" class="btn btn-primary">valider</button>
+  </form>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{EtudiantTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Contacter notre conseiller</title>
+<style type="text/css">
+label {
+	color: blue;
+}
+</style>
+</head>
+<body>
+ <div layout:fragment="content">
+ <br>
+ <br>
+  <div class="container">
+   <form th:action="@{/etudiant/contacter/{id}(id=${conseiller.id})}" method="post">
+    <div class="form-group">
+     <label for="email">Votre Email:</label>
+     <input type="email" class="form-control" id="email"  placeholder="Enter email" name="email">
+     <span class="red" th:errors=${message.email}></span>
+    </div>
+    <div class="form-group">
+     <label for="objet">Objet</label>
+     <input type="text" class="form-control" id="objet"  placeholder="Enter objet" name="objet">
+     <span class="red" th:errors=${message.objet}></span>
+    </div>
+    <div class="form-group">
+     <label for="description">Description:</label>
+     <textarea class="form-control" id="description" rows="3" placeholder="votre description" name="description"></textarea>
+     <span class="red" th:errors=${message.description}></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+   </form>     
+  </div>
+ </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{ConseillerTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Ajouter Nouveau Evenement</title>
+<style type="text/css">
+h2{
+color: blue;
+}
+label {
+	color: blue;
+}
+</style>
+</head>
+<body>
+
+ <div layout:fragment="content">
+
+<div class="container">
+  <h2>Nouveau Evenement</h2>
+  <form th:action="@{/conseiller/ajoutee}" method="post">
+    <div class="form-group">
+      <label for="titre">Titre:</label>
+      <input type="text" class="form-control" id="titre" placeholder="Enter votre titre ici" name="titre">
+      <span class="red" th:errors=${evenement.titre}></span>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" class="form-control" id="description" placeholder="Enter votre description ici" name="description">
+      <span class="red" th:errors=${evenement.description}></span>
+    </div>
+    <button type="submit" class="btn btn-primary">valider</button>
+  </form>
+</div>
+</div>
+</body>
+</html>

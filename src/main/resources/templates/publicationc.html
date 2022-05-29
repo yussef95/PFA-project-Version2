@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{ConseillerTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Publications</title>
+</head>
+<body>
+      <div layout:fragment="content">
+      <br>
+      <br>
+      <div class="container">
+     <h3 style="text-align: center; color: blue;">les Listes des Concours</h3>
+     <br>
+     <table class="table table-striped">
+                    <tr>
+                    <th>idPublication</th><th>titre</th><th>description</th><th>publié par</th> <!--<th>Action</th>-->
+                    </tr>
+                    <tr th:each="c:${listeConcours}">
+                    <td th:text="${c.id_publication}"></td>    
+                    <td th:text="${c.titre}"></td>
+                    <td th:text="${c.description}"></td>  
+                    <td th:text="${c.nom_complet}"></td>                     
+               <!-- <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/deletecnc(id=${c.id})}">supprimer</a></td> 
+                    <td><a th:href="@{/editec/{id}(id=${c.id})}">Editer</a></td> 
+              --> 
+                    </tr>
+      </table>
+      <br>
+      <h3 style="text-align: center; color: blue;">les Listes des Evenements</h3>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>idPublication</th><th>titre</th><th>description</th><th>publié par</th> <!--<th>Action</th>-->
+                    </tr>
+                    <tr th:each="e:${listeEvenements}">
+                    <td th:text="${e.id_publication}"></td>    
+                    <td th:text="${e.titre}"></td>
+                    <td th:text="${e.description}"></td>
+                    <td th:text="${e.nom_complet}"></td>
+                    <!--  
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/deleteevc(id=${e.id})}">supprimer</a></td> 
+                    <td><a th:href="@{/editee/{id}(id=${e.id})}">Editer</a></td> 
+                    -->
+                    </tr>
+      </table>
+      <br>
+      <h3 style="text-align: center; color: blue;">les Listes des Articles</h3>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>idPublication</th><th>titre</th><th>description</th><th>publié par</th> <!--<th>Action</th>-->
+                    </tr>
+                    <tr th:each="a:${listeArticles}">
+                    <td th:text="${a.id_publication}"></td>    
+                    <td th:text="${a.titre}"></td>
+                    <td th:text="${a.description}"></td>
+                    <td th:text="${a.nom_complet}"></td>
+                    <td></td>
+              <!--  <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/deleteac(id=${a.id})}">supprimer</a></td> 
+                    <td><a th:href="@{/editea(id=${a.id})}">Editer</a></td> 
+              -->      
+                    </tr>
+      </table>
+</div>
+</div>
+</body>
+</html>

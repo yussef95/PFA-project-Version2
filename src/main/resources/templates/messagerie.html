@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{ConseillerTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Message</title>
+<style type="text/css">
+label {
+	color: blue;
+}
+</style>
+</head>
+<body>
+ <div layout:fragment="content">
+ <br>
+ <br>
+  <div class="container">
+   <h3 style="text-align: center; color: blue;">Messageries</h3>
+      <br>
+      <br>
+     <table class="table table-striped">
+                    <tr>
+                    <th>id_Utilisateur</th><th>email</th><th>objet</th><th>description</th>
+                    </tr>
+                    <tr th:each="m:${message}">
+                    <td th:text="${m.id}"></td> 
+                    <td th:text="${m.email}"></td>   
+                    <td th:text="${m.objet}"></td>
+                    <td th:text="${m.description}"></td>  
+                    </tr>
+      </table>
+  </div>
+ </div>
+</body>
+</html>

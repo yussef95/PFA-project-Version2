@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{AdminTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Mon Profile</title>
+</head>
+<body>
+      <div layout:fragment="content">
+      <br>
+      <br>
+      <div class="container">
+      <h3 style="text-align: center; color: blue;">Mes Informations Personnels</h3>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>id</th><th>Nom Utilisateur</th><th>Email</th><th>Action</th>
+                    </tr>
+                    
+                    <tr th:each="pa:${profileAdmin}">
+                    <td th:text="${pa.id}"></td>
+                    <td th:text="${pa.nomUtilisateur}"></td>
+                    <td th:text="${pa.email}"></td>
+                    <td><a th:href="@{/admin/editeProfileA/{id}(id=${pa.id})}">Editer</a></td>  
+                    </tr>
+                    
+      </table>
+    
+</div>
+</div>
+</body>
+</html>

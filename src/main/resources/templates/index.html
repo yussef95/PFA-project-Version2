@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template}">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Page home</title>
+    </head>
+    
+	<body>
+	<div layout:fragment="content">	
+	<div class="fh5co-loader"></div>
+	
+	<aside id="fh5co-hero">
+		<div class="flexslider">
+			<ul class="slides">
+		   	 <li style="background-image: url(images/img_bg_4.jpg);">
+		   		<div class="overlay-gradient"></div>
+		   		 <div class="container">
+		   			<div class="row">
+			   			<div class="col-md-8 col-md-offset-2 text-center slider-text">
+			   				<div class="slider-text-inner">
+                                <h3 class="title" style="color: white;">Actualité, Coaching Et L'orientation Scolaire et Universitaire </h3>
+                                 <p>
+								 orientSU Est Le 1Er Site Dédié À L’Orientation Et L’Accompagnement Scolaire Au Maroc. Grace À L’Expertise De Son Équipe, orientSU.Ma Met À Votre Disposition Tout Ce Dont Vous Aurez Besoin Pour Réussir Votre Parcours Scolaire Et Mener À Bien Une Carrière Complète.
+								 </p>
+			   				 </div>
+			   			 </div>
+			   		 </div>
+		   		 </div>
+		   	 </li>
+		   </ul>	
+	  	</div>
+	</aside>
+
+	<div id="fh5co-course-categories">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+					<h2 style="color: blue;">Orientation, Coaching Et Accompagnement Les Jeunes De Lycée Marocain</h2>
+				</div>
+			</div>
+			 <div class="row">
+				<div class="col-md-3 col-md-12 text-center animate-box">
+					<h3 style="color: blue;">Pourquoi choisir orientSU pour l'orientation scolaire ?</h3>
+					<p>
+					    Grâce à un dialogue régulier et détaillé entre les élèves et leurs parents et notre plate-forme  en participe à la création  
+						d'un bilan scolaire avec des propositions adapté à vos besoins.
+						Lorsque nos propositions sont conforme à vos besoins, nous vous offrons l'intégration avec la méthode la plus adaptée pour vous faciliter l'orientation.
+						orientSU.MA vous propose les packs les plus adapté à vos besoins pour vous satisfaire.
+					</p>
+				</div>		
+			</div>
+		</div>
+	</div>
+
+	<div id="fh5co-counter" class="fh5co-counters" style="background-image: url(images/img_bg_4.jpg);" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		 <div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="row">
+						<div class="col-md-3 col-sm-6 text-center animate-box">
+							<span class="icon"><i class="icon-world"></i></span>
+							<span class="fh5co-counter-label">Prendre le temps de se poser les bonnes questions et de s'écouter.</span>
+						</div>
+						<div class="col-md-3 col-sm-6 text-center animate-box">
+							<span class="icon"><i class="icon-study"></i></span>
+							<span class="fh5co-counter-label">Tracer le chemin de réussite en définissant le parcours jusqu’à 5 ans..</span>
+						</div>
+						<div class="col-md-3 col-sm-6 text-center animate-box">
+							<span class="icon"><i class="icon-bulb"></i></span>
+							<span class="fh5co-counter-label">Gagner le temps et l’argent grâce à une orientation réussi.</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="fh5co-testimonial" style="background-image: url(images/school.jpg);">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+					<h2><span>Orientation scolaire et professionnelle au Maroc</span></h2>
+					<p>L'orientation scolaire et professionnelle est une question particulièrement importante aujourd'hui, en tant qu'elle détermine fortement les chances d'une insertion professionnelle réussie sur le marché du travail devenu de plus en plus difficile. Les familles l'ont d'ailleurs bien compris puisqu'elles s'intéressent, souvent avec inquiétude, à l'orientation de leur enfant. Aujourd'hui, la situation semble à cet égard préoccupante puisque le système de l'orientation, fortement contesté sur la place publique, révèle un certain nombre d'inégalités et de dysfonctionnements. On voit d'ailleurs se développer, en réponse à ces défaillances, un marché privé de l'orientation scolaire et professionnelle venant creuser les inégalités et accroître le discrédit du service public de l'Education. Tous s'accordent aujourd'hui sur la nécessité d'une réforme de fond afin de moderniser, d'optimiser et de rendre plus juste le système actuel.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+</div>
+	
+	<!-- jQuery -->
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<!-- jQuery Easing -->
+	<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+	<!-- Bootstrap -->
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<!-- Waypoints -->
+	<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+	<!-- Stellar Parallax -->
+	<script th:src="@{/js/jquery.stellar.min.js}"></script>
+	<!-- Carousel -->
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<!-- Flexslider -->
+	<script th:src="@{/js/jquery.flexslider-min.js}"></script>
+	<!-- countTo -->
+	<script th:src="@{/js/jquery.countTo.js}"></script>
+	<!-- Magnific Popup -->
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/magnific-popup-options.js}"></script>
+	<!-- Count Down -->
+	<script th:src="@{/js/simplyCountdown.js}"></script>
+	<!-- Main -->
+	<script th:src="@{/js/main.js}"></script>
+	<script>
+    var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
+
+    // default example
+    simplyCountdown('.simply-countdown-one', {
+        year: d.getFullYear(),
+        month: d.getMonth() + 1,
+        day: d.getDate()
+    });
+
+    //jQuery example
+    $('#simply-countdown-losange').simplyCountdown({
+        year: d.getFullYear(),
+        month: d.getMonth() + 1,
+        day: d.getDate(),
+        enableUtc: false
+    });
+	</script>
+	</body>
+</html>
+

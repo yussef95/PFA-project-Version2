@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{ConseillerTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Mon Profile</title>
+</head>
+<body>
+      <div layout:fragment="content">
+      <br>
+      <br>
+      <div class="container">
+      <h3 style="text-align: center; color: blue;">Mes Informations Personnels</h3>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>idUtilisateur</th><th>SecteurOrientation</th><th>etablissement</th><th>Nom Complet</th><th>Email</th><th>Nom Utilisateur</th><th>Action</th>
+                    </tr>
+                    <tr th:each="pd:${profilData}">
+                    <td th:text="${pd.id_utilisateur}"></td>
+                    <td th:text="${pd.libelles}"></td> 
+                    <td th:text="${pd.libellee}"></td>
+                    <td th:text="${pd.nom_complet}"></td> 
+                    <td th:text="${pd.email}"></td>
+                    <td th:text="${pd.nom_utilisateur}"></td>
+                    <td><a th:href="@{/conseiller/editeProfilec/{id}(id=${pd.id_utilisateur})}">Editer</a></td> 
+                    </tr>
+                    
+      </table>
+      <br>
+     <h3 style="text-align: center; color: blue;">Mes publications</h3>
+     <br>
+     <br>
+     
+     <h3 style="text-align: center; color: blue;">les Listes des Concours</h3>
+     <br>
+     <table class="table table-striped">
+                    <tr>
+                    <th>idPublication</th><th>titre</th><th>description</th><th>Action</th>
+                    </tr>
+                    <tr th:each="c:${listeConcours}">
+                    <td th:text="${c.id_publication}"></td>    
+                    <td th:text="${c.titre}"></td>
+                    <td th:text="${c.description}"></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/conseiller/deletecnc(id=${c.id_publication})}">supprimer</a></td> 
+                    <td><a th:href="@{/conseiller/editec/{id}(id=${c.id_publication})}">Editer</a></td>  
+                    </tr>
+                    
+      </table>
+      
+      <br>
+      <h3 style="text-align: center; color: blue;">les Listes des Evenements</h3>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>idPublication</th><th>titre</th><th>description</th><th>Action</th>
+                    </tr>
+                    <tr th:each="e:${listeEvenements}">
+                    <td th:text="${e.id_publication}"></td>    
+                    <td th:text="${e.titre}"></td>
+                    <td th:text="${e.description}"></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/conseiller/deleteevc(id=${e.id_publication})}">supprimer</a></td> 
+                    <td><a th:href="@{/conseiller/editee/{id}(id=${e.id_publication})}">Editer</a></td> 
+                    </tr>
+                    
+      </table>
+      <br>
+      
+      <h3 style="text-align: center; color: blue;">les Listes des Articles</h3>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>idPublication</th><th>titre</th><th>description</th><th>Action</th>
+                    </tr> 
+                    <tr th:each="a:${listeArticles}">
+                    <td th:text="${a.id_publication}"></td>    
+                    <td th:text="${a.titre}"></td>
+                    <td th:text="${a.description}"></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/conseiller/deleteac(id=${a.id_publication})}">supprimer</a></td> 
+                    <td><a th:href="@{/conseiller/editea(id=${a.id_publication})}">Editer</a></td>       
+                    </tr>
+                    
+      </table>
+       
+    
+</div>
+</div>
+</body>
+</html>

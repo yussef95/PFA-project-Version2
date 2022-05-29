@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template}">
+<head>
+<meta charset="UTF-8"/>
+<title>Cycle Collége</title>
+</head>
+<body>
+<div layout:fragment="content">
+     <div id="fh5co-blog">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2 style="color: blue;">Enseignement Collégial</h2>
+				</div>
+			</div>
+			<div class="row row-padded-mb">
+				<div class="col-md-5 animate-box">
+					<div class="fh5co-event">
+						<h3 style="color: blue;">Cycle collège au Maroc</h3>
+						<p>Pour étudier au collège au Maroc il faudra avoir réussi tout d’abord ses études au primaire, les études au collège Maroc sont étalées sur 3 ans dans lesquelles le collégien se décide sur ses choix d’orientation, avant la fin de l’étape du collège chaque élève choisit son choix d’orientation.
+                           Savoir s’orienter au collège Maroc veut dire réussir ses études au lycée, on ne peut pas réussir après le collège si on ne fait pas le bon choix. Pour faire le bon choix à la fin des études au collège, l’élève doit s’informer suffisamment.
+                        </p>
+					</div>
+				</div>
+				<div class="col-md-5 animate-box">
+					<div class="fh5co-event">
+						<h3 style="color: blue;">A propos du collège au Maroc</h3>
+						<p>Les trois années des études collège Maroc sont suffisantes pour l’élève afin de s’initier aux matières différentes :  scientifiques, littéraires et techniques. Ce qui lui permettra de choisir ce qu’il étudiera au lycée et même à l’université. Au milieu de la troisième année collège Maroc, l’élève remplit la fiche d’orientation pour choisir la filière du tronc commun.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="fh5co-register" style="background-image: url(images/img_bg_2.jpg);">
+	    <div class="overlay"></div>
+		<div class="row">
+		  <div class="col-md-8 col-md-offset-2 animate-box">
+				<h3 style="text-align: center;">
+				 Nombre d'heures d'instruction par discipline/matière aux différents niveaux
+				</h3>
+				<table class="table table-striped">
+                <tr>
+                <th>Disciplines/Niveaux</th><th>7ème année</th><th>8ème année</th><th>9ème année</th>
+                </tr>
+                <tr>
+                <td>Langue Arabe</td>
+                <td>6h</td>
+                <td>6h</td>
+                <td>6h</td>
+                </tr>
+                <tr>
+                <td>Instruction Islamique</td>
+                <td>2h</td>
+                <td>2h</td>
+                <td>2h</td>
+                </tr>
+                <tr>
+                <td>Disciplines sociales</td>
+                <td>3h</td>
+                <td>3h</td>
+                <td>3h</td>
+                </tr>
+                <tr>
+                <td>Français</td>
+                <td>6h</td>
+                <td>6h</td>
+                <td>6h</td>
+                </tr>
+                <tr>
+                <td>Mathématiques</td>
+                <td>6h</td>
+                <td>6h</td>
+                <td>6h</td>
+                </tr>
+                <tr>
+                <td>Sciences Naturelles</td>
+                <td>2h</td>
+                <td>2h</td>
+                <td>2h</td>
+                </tr>
+                <tr>
+                <td>Sciences Physiques</td>
+                <td>2h</td>
+                <td>2h</td>
+                <td>2h</td>
+                </tr>
+                <tr>
+                <td>Education Physique</td>
+                <td>3h</td>
+                <td>3h</td>
+                <td>3h</td>
+                </tr>
+                <tr>
+                <td>Education Plastique</td>
+                <td>1h</td>
+                <td>1h</td>
+                <td>1h</td>
+                </tr>
+                <tr>
+                <td>Culture Féminine ou Initiation à la Technologie</td>
+                <td>2h</td>
+                <td>2h</td>
+                <td>2h</td>
+                </tr>
+                <tr>
+                <td>Education Musicale</td>
+                <td>2h</td>
+                <td>-</td>
+                <td>-</td>
+                </tr>
+                <tr>
+                <td>Total</td>
+                <td>35h</td>
+                <td>33h</td>
+                <td>33h</td>
+                </tr> 
+                </table>
+             </div>
+	      </div>
+	</div>
+
+</div>
+
+	<!-- jQuery -->
+	<script th:src="@{js/jquery.min.js}"></script>
+	<!-- jQuery Easing -->
+	<script th:src="@{js/jquery.easing.1.3.js}"></script>
+	<!-- Bootstrap -->
+	<script th:src="@{js/bootstrap.min.js}"></script>
+	<!-- Waypoints -->
+	<script th:src="@{js/jquery.waypoints.min.js}"></script>
+	<!-- Stellar Parallax -->
+	<script th:src="@{js/jquery.stellar.min.js}"></script>
+	<!-- Carousel -->
+	<script th:src="@{js/owl.carousel.min.js}"></script>
+	<!-- Flexslider -->
+	<script th:src="@{js/jquery.flexslider-min.js}"></script>
+	<!-- countTo -->
+	<script th:src="@{js/jquery.countTo.js}"></script>
+	<!-- Magnific Popup -->
+	<script th:src="@{js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{js/magnific-popup-options.js}"></script>
+	<!-- Count Down -->
+	<script th:src="@{js/simplyCountdown.js}"></script>
+	<!-- Main -->
+	<script th:src="@{js/main.js}"></script>
+	<script>
+    var d = new Date(new Date().getTime() + 1000 * 120 * 120 * 2000);
+
+    // default example
+    simplyCountdown('.simply-countdown-one', {
+        year: d.getFullYear(),
+        month: d.getMonth() + 1,
+        day: d.getDate()
+    });
+
+    //jQuery example
+    $('#simply-countdown-losange').simplyCountdown({
+        year: d.getFullYear(),
+        month: d.getMonth() + 1,
+        day: d.getDate(),
+        enableUtc: false
+    });
+	</script>
+	
+</body>
+</html> 

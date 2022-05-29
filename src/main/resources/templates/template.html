@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css}"/>
+<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
+<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+<meta name="author" content="freehtml5.co" />
+<link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700}" rel="stylesheet"/>
+<link th:href="@{https://fonts.googleapis.com/css?family=Roboto+Slab:300,400}" rel="stylesheet"/>
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" th:href="@{/css/animate.css}"/>
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" th:href="@{/css/icomoon.css}"/>
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" th:href="@{/css/magnific-popup.css}"/>
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}"/>
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" th:href="@{/css/flexslider.css}"/>
+
+	<!-- Pricing -->
+	<link rel="stylesheet" th:href="@{/css/pricing.css}"/>
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+
+	<!-- Modernizr JS -->
+	<script th:src="@{/js/modernizr-2.6.2.min.js}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+<title>template</title>
+
+</head>
+
+<body>
+<header>
+  <div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="top-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-2">
+					 <div id="fh5co-logo"><a th:href="@{/}"><i class="icon-study"></i>orientSU<span>.</span></a></div>
+					</div>
+					<div class="col-xs-10 text-right menu-1">
+						<ul>
+						    <li><a th:href="@{/}">Home</a></li>
+							<li><a th:href="@{/college}">Collège</a></li>
+							<li><a th:href="@{/lycee}">Lycée</a></li>
+							<li><a th:href="@{/evenement}">Evenement</a></li>
+							<li><a th:href="@{/concoursh}">Concours</a></li>
+							<li><a th:href="@{/article}">Article</a></li>
+							<li><a th:href="@{/contact}">Contactez-nous</a></li>
+							<li class="btn-cta"><a th:href="@{/login}"><span>Login</span></a></li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</nav>
+  </div>	
+</header>
+
+<section layout:fragment="content"></section>
+
+<footer id="fh5co-footer" role="contentinfo" style="background-image: url(images/img_bg_4.jpg);">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row row-pb-md">
+				<div class="col-md-3 fh5co-widget">
+					<h3>orientSU.ma</h3>
+					<p>
+						orientsu Est Le 1Er Site Dédié À L’Orientation Et L’Accompagnement Scolaire Au Maroc. Grace À L’Expertise De Son Équipe, orientSU.Ma Met À Votre Disposition Tout Ce Dont Vous Aurez Besoin Pour Réussir Votre Parcours Scolaire Et Mener À Bien Une Carrière Complète.
+					</p>
+				</div>
+				
+
+				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 fh5co-widget">
+					<h3>CONTACTEZ-NOUS</h3>
+					<ul class="fh5co-footer-links">
+					    <li>Address:</li>
+						<li>Boulevard med 6 oujda,oriental,60000 </li>
+						<li>Telephone:</li>
+						<li>0627049473</li>
+						<li>Email:</li>
+						<li>orientsu@gmail.com</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block">&copy; 2022. All Rights Reserved.</small> 
+						
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</footer>
+</body>
+</html>

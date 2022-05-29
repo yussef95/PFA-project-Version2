@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{AdminTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Publications</title>
+</head>
+
+<body>
+
+ <div layout:fragment="content">
+ <br>
+ <br>
+ <br>
+  <div class="container">
+      <!--  
+      <h3 style="text-align: center; color: blue;">les Listes des Publications</h3>
+      <br>
+      <br>
+     <table class="table table-striped">
+                    <tr>
+                    <th>id</th><th>id_conseiller</th><th>Action</th>
+                    </tr>
+                    <tr th:each="p:${listePublications}">
+                    <td th:text="${p.id}"></td>    
+                    <td th:text="${p.id}"></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/deletep(id=${p.id})}">supprimer</a></td>
+                    </tr>
+      </table>
+      <br>
+      -->
+     <h3 style="text-align: center; color: blue;">les Listes des Concours</h3>
+      <br>
+      <br>
+     <table class="table table-striped">
+                    <tr>
+                    <th>id_publication</th><th>titre</th><th>description</th><th>publié par</th><th>Action</th>
+                    </tr>
+                    <tr th:each="c:${listeconcours}">
+                    <td th:text="${c.id_publication}"></td>    
+                    <td th:text="${c.titre}"></td>
+                    <td th:text="${c.description}"></td>  
+                    <td th:text="${c.nom_complet}"></td>                  
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deletecn(id=${c.id_publication})}">supprimer</a></td>
+                    </tr>
+      </table>
+      <br>
+      <h3 style="text-align: center; color: blue;">les Listes des Evenements</h3>
+      <br>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>id_publication</th><th>titre</th><th>description</th><th>publié par</th><th>Action</th>
+                    </tr>
+                    <tr th:each="e:${listeevenements}">
+                    <td th:text="${e.id_publication}"></td>    
+                    <td th:text="${e.titre}"></td>
+                    <td th:text="${e.description}"></td>
+                    <td th:text="${e.nom_complet}"></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deleteev(id=${e.id_publication})}">supprimer</a></td>
+                    </tr>
+      </table>
+      <br>
+      <h3 style="text-align: center; color: blue;">les Listes des Article</h3>
+      <br>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>id_publication</th><th>titre</th><th>description</th><th>publié par</th><th>Action</th>
+                    </tr>
+                    <tr th:each="a:${listearticles}">
+                    <td th:text="${a.id_publication}"></td>    
+                    <td th:text="${a.titre}"></td>
+                    <td th:text="${a.description}"></td>
+                    <td th:text="${a.nom_complet}"></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deletea(id=${a.id_publication})}">supprimer</a></td>
+                    </tr>
+      </table>
+</div>      
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{EtudiantTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Les listes des Conseillers</title>
+</head>
+<body>
+      <div layout:fragment="content">
+      <br>
+      <br>
+      <div class="container">
+      <h3 style="text-align: center; color: blue;">Les listes des conseillers</h3>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>idUtilisateur</th><th>SecteurOrientation</th><th>etablissement</th><th>Nom Complet</th><th>Email</th><th>Nom Utilisateur</th><th>Action</th>
+                    </tr>
+                    
+                    <tr th:each="et:${ProfilDataCE}">
+                    <td th:text="${et.id_utilisateur}"></td>
+                    <td th:text="${et.libelles}"></td> 
+                    <td th:text="${et.libellee}"></td>
+                    <td th:text="${et.nom_complet}"></td> 
+                    <td th:text="${et.email}"></td>
+                    <td th:text="${et.nom_utilisateur}"></td>
+                    <td>
+                    <a th:href="@{/etudiant/contacter}" class="btn btn-primary">contacter</a>
+                    </td>
+                    </tr>
+                    
+      </table>
+    
+</div>
+</div>
+</body>
+</html>
