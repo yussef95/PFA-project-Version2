@@ -24,6 +24,8 @@ public abstract class Publication implements Serializable {
 	@JoinColumn(name = "id_conseiller")
 	private Conseiller conseiller;
 	
+	
+
 	public Publication() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -32,6 +34,7 @@ public abstract class Publication implements Serializable {
 	public Publication(Conseiller conseiller) {
 		super();
 		this.conseiller = conseiller;
+
 
 	}
 	public int getId() {
@@ -48,6 +51,6 @@ public abstract class Publication implements Serializable {
 	public void setConseiller(Conseiller conseiller) {
 		this.conseiller = conseiller;
 	}
-
+	
 
 }

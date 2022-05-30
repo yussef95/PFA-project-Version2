@@ -14,41 +14,31 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class MultipleSecurityConfig {
+public class MultipleSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Configuration
+	@EnableWebSecurity
 	@Order(1)
 	public static class AdminConfiguration extends WebSecurityConfigurerAdapter{
 		@Autowired
 		AdminDetailsService adminDetailsService;
 		
 		protected void configure(HttpSecurity http) throws Exception {
-			      /*
-			      http
-			     .formLogin()
-				 .loginPage("/loginAdmin")
-				 .usernameParameter("email");
-			     		
-				  http
-				 .authorizeRequests()
-				 .antMatchers("/admin/**")
-				 .authenticated()
-		         ;
-			     */
-			 http
-		      .authorizeRequests()
-		        .antMatchers("/admin/**")
-		        .authenticated() 
-		        .and()
-		        .formLogin()  
-		        .loginPage("/loginAdmin") 
-		        .usernameParameter("email")
-		        .permitAll(); 
-			 
-			 http
-			     .exceptionHandling()
-			     .accessDeniedPage("/403");
-
+			     
+			http.csrf().disable();
+			
+			http
+			.formLogin()
+			.loginPage("/loginAdmin")
+			.usernameParameter("email")
+			.permitAll();
+			
+			http
+			.antMatcher("/admin/*")
+			.authorizeRequests()
+			.anyRequest()
+			.authenticated();
+			
 		}
 		@Override
 		
@@ -77,32 +67,23 @@ public class MultipleSecurityConfig {
 		EtudiantDetailsService service;
 		
 		protected void configure(HttpSecurity http) throws Exception {
-			 /*
-		     http
-		    .formLogin()
-			.loginPage("/loginEtudiant")
-			.usernameParameter("email");
-		     		
-			  http
-			 .authorizeRequests()
-			 .antMatchers("/etudiant/**")
-			 .authenticated()
-	         ;
-		     */
-			
-			 http
-		        .authorizeRequests()
-		        .antMatchers("/","/college","/lycee","contact").permitAll() 
-		        .antMatchers("/etudiant/**")
-		        .authenticated() 
-		        .and()
-		        .formLogin()  
-		        .loginPage("/loginEtudiant") 
-		        .permitAll(); 
 			 
-			 http
-			.exceptionHandling()
-			.accessDeniedPage("/403");
+			
+			http.csrf().disable();
+			
+			     http
+				.formLogin()
+				.loginPage("/loginEtudiant")
+				.usernameParameter("email")
+				.permitAll();
+			
+			        http
+					.antMatcher("/etudiant/*")
+					.authorizeRequests()
+					.anyRequest()
+					.authenticated();
+					
+
 	}
 		@Override
 		protected void configure(AuthenticationManagerBuilder auth)  {

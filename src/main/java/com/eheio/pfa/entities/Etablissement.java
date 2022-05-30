@@ -29,13 +29,10 @@ public class Etablissement implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Etablissement(int id, String libelle, Collection<Etudiant> etudiants,Collection<Conseiller>conseillers,Collection<Professeur> professeurs) {
+	public Etablissement( String libelle) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
-		this.etudiants = etudiants;
-		this.conseillers = conseillers;
-		this.professeurs = professeurs;
+		
 
 	}
 	public int getId() {

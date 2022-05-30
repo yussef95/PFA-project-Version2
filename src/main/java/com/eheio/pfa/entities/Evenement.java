@@ -19,7 +19,7 @@ public class Evenement extends Publication {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Evenement(Conseiller conseiller,String titre, String description) {
+	public Evenement(Professeur professeur,Conseiller conseiller,String titre, String description) {
 		super( conseiller);
 		// TODO Auto-generated constructor stub
 		this.titre = titre;

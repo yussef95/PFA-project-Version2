@@ -1,11 +1,14 @@
 package com.eheio.pfa.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
@@ -19,9 +22,21 @@ public class Professeur extends Utilisateur{
 	private boolean isaprouv;
 	private String nomComplet;
 	
+	
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "id_etablissement")
 	private Etablissement etablissement;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_SecteurOrientation")
+	private SecteurOrientation orientation;
+
+	@OneToMany(mappedBy = "professeur",fetch = FetchType.LAZY )
+	private Collection<Cours> cours;
+	
+	
 
 	public Professeur() {
 		super();
@@ -29,7 +44,7 @@ public class Professeur extends Utilisateur{
 	}
 
 	public Professeur(String email, String password, String nomUtilisateur, boolean isaprouv, String nomComplet,
-			Etablissement etablissement) {
+			Etablissement etablissement,SecteurOrientation orientation) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -37,6 +52,8 @@ public class Professeur extends Utilisateur{
 		this.isaprouv = isaprouv;
 		this.nomComplet = nomComplet;
 		this.etablissement = etablissement;
+		this.orientation = orientation;
+
 	}
 
 	public String getEmail() {
@@ -86,6 +103,22 @@ public class Professeur extends Utilisateur{
 	public void setEtablissement(Etablissement etablissement) {
 		this.etablissement = etablissement;
 	}
+	public SecteurOrientation getOrientation() {
+		return orientation;
+	}
+
+	public void setOrientation(SecteurOrientation orientation) {
+		this.orientation = orientation;
+	}
+	
+	public Collection<Cours> getCours() {
+		return cours;
+	}
+
+	public void setCours(Collection<Cours> cours) {
+		this.cours = cours;
+	}
+
 	
 
 }

@@ -20,6 +20,10 @@ public class SecteurOrientation implements Serializable{
 	@OneToMany(mappedBy = "orientation",fetch = FetchType.LAZY )
     private Collection<Conseiller>conseillers;
 	
+	@OneToMany(mappedBy = "orientation",fetch = FetchType.LAZY )
+    private Collection<Professeur> professeurs;
+	
+	
 	public SecteurOrientation() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -45,6 +49,12 @@ public class SecteurOrientation implements Serializable{
 	}
 	public void setConseillers(Collection<Conseiller> conseillers) {
 		this.conseillers = conseillers;
+	}
+	public Collection<Professeur> getProfesseurs() {
+		return professeurs;
+	}
+	public void setProfesseurs(Collection<Professeur> professeurs) {
+		this.professeurs = professeurs;
 	}
 
 	

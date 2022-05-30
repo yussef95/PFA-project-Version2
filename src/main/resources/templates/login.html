@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+ >
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -24,11 +27,11 @@
                           <form th:action="@{/loginAdmin}" method="post">
                            <div class="mb-3 mt-3">
                             <label for="email">Email:</label>
-                            <input type="email" name="email" class="form-control" id="email" placeholder="Enter votre email" />
+                            <input type="email" name="email" required class="form-control" id="email" placeholder="Enter votre email" />
                            </div>
                             <div class="mb-3">
                              <label for="pwd">Password:</label>
-                             <input type="password" name="password" class="form-control" id="password" placeholder="Enter votre mot de passe" />
+                             <input type="password" name="password" required class="form-control" id="password" placeholder="Enter votre mot de passe" />
                             </div>
                             <button type="submit" class="btn btn-primary">se connecter</button>
                            </form>

@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class SecurityController {
 
 	//page de login admin
-			@RequestMapping(value="/loginAdmin",method = RequestMethod.GET)
+			@GetMapping(value="/loginAdmin")
 			public String login() {
 				return "login";
 			}
 			    
 			   //page de login etudiant
-				@GetMapping(value="/loginEtudiant")
+			@GetMapping(value="/loginEtudiant")
 				public String loginEtudiant() {
 					return "loginEtudiant";
 				}
