@@ -152,14 +152,14 @@ public class AdminController {
 		   @GetMapping(value = "/admin/approuv/{idConseiller}")
 			public String approuver(@PathVariable int idConseiller ) {
 		    Optional<Conseiller> c=conseillerRepository.findById(idConseiller);
-		    if(!c.isEmpty()) {
+		    //if(!c.isEmpty()) {
 		    	Conseiller conseiller=c.get();
 		    	conseiller.setIsaprouv(true);
 		    	conseillerRepository.save(conseiller);
 		    	return "redirect:/admin/utilisateur";
 		    	//il faut mettre une page 404...
-		    }
-		    return "404";
+		    //}
+		   // return "404";
 			
 		}
 		   

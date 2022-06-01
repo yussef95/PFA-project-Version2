@@ -14,83 +14,96 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class MultipleSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
+public class MultipleSecurityConfig  {
 	@Configuration
-	@EnableWebSecurity
 	@Order(1)
-	public static class AdminConfiguration extends WebSecurityConfigurerAdapter{
+	public static class AdminConfiguration extends WebSecurityConfigurerAdapter {
+
+        public  AdminConfiguration(){
+			super();
+		}
+
+
 		@Autowired
 		AdminDetailsService adminDetailsService;
-		
+
 		protected void configure(HttpSecurity http) throws Exception {
-			     
-			http.csrf().disable();
-			
+
+			//http.csrf().disable();
+
 			http
-			.formLogin()
-			.loginPage("/loginAdmin")
-			.usernameParameter("email")
-			.permitAll();
-			
-			http
-			.antMatcher("/admin/*")
-			.authorizeRequests()
-			.anyRequest()
-			.authenticated();
-			
+					.antMatcher("/admin/**")
+					.authorizeRequests()
+					.anyRequest()
+					.authenticated()
+					.and()
+			        .formLogin()
+					.loginPage("/admin/login")
+					.usernameParameter("email")
+					.permitAll();
+
+
+
+
 		}
-		@Override
-		
-		protected void configure(AuthenticationManagerBuilder auth)  {
-			auth.authenticationProvider(authenticationProvider());	
+
+
+		protected void configure(AuthenticationManagerBuilder auth) {
+			auth.authenticationProvider(authenticationProvider());
 		}
-		
+
 		@Bean
 		DaoAuthenticationProvider authenticationProvider() {
-			DaoAuthenticationProvider daoauthenticationProvider=new DaoAuthenticationProvider();
+			DaoAuthenticationProvider daoauthenticationProvider = new DaoAuthenticationProvider();
 			daoauthenticationProvider.setPasswordEncoder(passwordEncoder());
 			daoauthenticationProvider.setUserDetailsService(adminDetailsService);
 			return daoauthenticationProvider;
 		}
+
 		@Bean
 		PasswordEncoder passwordEncoder() {
 			return new BCryptPasswordEncoder();
-			
+
 		}
 	}
+
+
 	@Configuration
 	@Order(2)
+
 	public class EtudiantConfiguration extends WebSecurityConfigurerAdapter {
-		
+		public  EtudiantConfiguration(){
+			super();
+		}
 		@Autowired
 		EtudiantDetailsService service;
-		
+
 		protected void configure(HttpSecurity http) throws Exception {
-			 
-			
-			http.csrf().disable();
-			
-			     http
-				.formLogin()
-				.loginPage("/loginEtudiant")
-				.usernameParameter("email")
-				.permitAll();
-			
-			        http
-					.antMatcher("/etudiant/*")
+
+
+			//http.csrf().disable();
+
+			http
+					.antMatcher("/etudiant/**")
 					.authorizeRequests()
 					.anyRequest()
-					.authenticated();
-					
+					.authenticated()
+
+					.and()
+				    .formLogin()
+				    .loginPage("/etudiant/loginEtudiant")
+					.usernameParameter("email")
+				    .permitAll();
+
 
 	}
 		@Override
 		protected void configure(AuthenticationManagerBuilder auth)  {
 			auth.authenticationProvider(authenticationProvider());
-			
+
 		}
-		
+
 		@Bean
 		DaoAuthenticationProvider authenticationProvider() {
 			DaoAuthenticationProvider daoauthenticationProvider=new DaoAuthenticationProvider();
@@ -101,7 +114,8 @@ public class MultipleSecurityConfig extends WebSecurityConfigurerAdapter {
 		@Bean
 		PasswordEncoder passwordEncoder() {
 			return new BCryptPasswordEncoder();
-			
+
 		}
 	}
 }
+

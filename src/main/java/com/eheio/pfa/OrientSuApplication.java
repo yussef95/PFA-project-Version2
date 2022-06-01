@@ -37,7 +37,7 @@ import com.eheio.pfa.entities.Utilisateur;
 @SpringBootApplication
 public class OrientSuApplication  implements CommandLineRunner {
 
-	@Autowired
+	 @Autowired
 	 private PasswordEncoder passwordEncoder;
 	 @Autowired
 	 private UtilisateurRepository utilisateurRepository;
@@ -69,11 +69,11 @@ public class OrientSuApplication  implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
+
 		/*
-		Admin a= adminRepository.save(new Admin("admin@gmail.com","admin123","admin"));
-		Etablissement et1=etablissementRepository.save(new Etablissement(1, "ziri", null,null));
-		Etablissement et2=etablissementRepository.save(new Etablissement(2, "abdelmoumen", null,null));
-		Etablissement et3=etablissementRepository.save(new Etablissement(3, "med6", null,null));
+		Etablissement et1=etablissementRepository.save(new Etablissement("ziri"));
+		Etablissement et2=etablissementRepository.save(new Etablissement("abdelmoumen"));
+		Etablissement et3=etablissementRepository.save(new Etablissement("med6"));
 		NiveauScolaire college1=niveauScolaireRepository.save(new NiveauScolaire("1ére année collège"));
 		NiveauScolaire college2=niveauScolaireRepository.save(new NiveauScolaire("2éme année collège"));
 		NiveauScolaire college3=niveauScolaireRepository.save(new NiveauScolaire("3éme année collège"));
@@ -81,17 +81,18 @@ public class OrientSuApplication  implements CommandLineRunner {
         SecteurOrientation s2=orientationRepository.save(new SecteurOrientation("lettre"));
         SecteurOrientation s3=orientationRepository.save(new SecteurOrientation("technique"));
         SecteurOrientation s4=orientationRepository.save(new SecteurOrientation("economique"));
-        Utilisateur c1=utilisateurRepository.save(new Conseiller("conseiller1@gmail.com","1234conseiller1","conseiller1",false,"cn1",null,null));
-        Utilisateur c2=utilisateurRepository.save(new Conseiller("conseiller2@gmail.com","1234conseiller2","conseiller2",false,"cn2",null,null));
-        Utilisateur c3=utilisateurRepository.save(new Conseiller("conseiller3@gmail.com","1234conseiller3","conseiller3",false,"cn3",null,null));
-        Utilisateur e1=utilisateurRepository.save(new Etudiant("Etudiant1@gmail.com","123Etudiant1","Etudiant1","mhada med", college1,null));
-        Utilisateur e2=utilisateurRepository.save(new Etudiant("Etudiant2@gmail.com","123Etudiant2","Etudiant2","oufkir yussef", college2,null));
-        Utilisateur c4=utilisateurRepository.save(new Conseiller("conseiller4@gmail.com","1234conseiller4","conseiller4",false,"cn4",s1,et2));	
-        Utilisateur e3=utilisateurRepository.save(new Etudiant("Etudiant3@gmail.com",passwordEncoder.encode("123Etudiant3"),"Etudiant3","salhi yassen", null,null));
+        Utilisateur c1=utilisateurRepository.save(new Conseiller("conseiller1@gmail.com",passwordEncoder.encode("1234conseiller"),"conseiller1",false,"cn1",s1,et1));
+        Utilisateur c2=utilisateurRepository.save(new Conseiller("conseiller2@gmail.com",passwordEncoder.encode("1234conseiller"),"conseiller2",false,"cn2",s2,et2));
+        Utilisateur c3=utilisateurRepository.save(new Conseiller("conseiller3@gmail.com",passwordEncoder.encode("1234conseiller"),"conseiller3",false,"cn3",s3,et3));
+        Utilisateur e1=utilisateurRepository.save(new Etudiant("Etudiant1@gmail.com",passwordEncoder.encode("1234"),"Etudiant1","mhada med", college1,et1));
+        Utilisateur e2=utilisateurRepository.save(new Etudiant("Etudiant2@gmail.com",passwordEncoder.encode("1234"),"Etudiant2","oufkir yussef", college2,et2));
+		Utilisateur e3=utilisateurRepository.save(new Etudiant("Etudiant3@gmail.com",passwordEncoder.encode("1234"),"Etudiant3","salhi yassen", college3,et3));
+		Admin a= adminRepository.save(new Admin("admin2@gmail.com",passwordEncoder.encode("admin123"),"admin"));
 
         */
 
-		
+
+
 	}
 
 }

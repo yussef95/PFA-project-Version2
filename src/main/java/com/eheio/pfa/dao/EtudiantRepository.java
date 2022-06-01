@@ -27,9 +27,9 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Integer> {
      		+ " inner join etablissement e on et.id_etablissement=e.id "
      		+ " inner join niveau_scolaire n on et.id_niveau_scolaire=n.id",nativeQuery = true)
 	 public List<ListDataEtudiant> listEtudiant();
-	 
-	 //@Query
-	 //("select e from Etudiant e where e.email=?1")
-	    Etudiant findByEmail(String email);
+
+
+	@Query("SELECT e FROM Etudiant e WHERE e.email = :email")
+	Etudiant findByEmail(@Param("email") String email);
 	 
 }

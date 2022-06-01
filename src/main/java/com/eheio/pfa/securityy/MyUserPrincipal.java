@@ -7,10 +7,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.eheio.pfa.entities.Admin;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class MyUserPrincipal implements UserDetails {
 
-	
+
 	private Admin admin;
 	
 	public MyUserPrincipal(Admin admin) {
@@ -29,13 +30,13 @@ public class MyUserPrincipal implements UserDetails {
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return this.admin.getPassword();
+		return admin.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return this.admin.getEmail();
+		return admin.getEmail();
 	}
 
 	@Override

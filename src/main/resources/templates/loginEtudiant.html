@@ -23,15 +23,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
                 <div class="col-md-4 animate-box">
                     <div class="fh5co-event">
                         <div class="container mt-3">              
-                          <form th:action="@{/loginEtudiant}" method="post">
+                          <form th:action="@{/etudiant/loginEtudiant}" method="post">
     
                            <div class="mb-3 mt-3">
                             <label for="email">Email:</label>
-                            <input type="email" name="email" class="form-control" id="email" placeholder="Enter votre email" />
+                            <input type="email" name="email" class="form-control"  placeholder="Enter votre email" />
                            </div>
                             <div class="mb-3">
-                             <label for="pwd">Password:</label>
-                             <input type="password" name="password" class="form-control" id="password" placeholder="Enter votre mot de passe" />
+                             <label for="password">Password:</label>
+                             <input type="password" name="password" class="form-control"  placeholder="Enter votre mot de passe" />
                             </div>
                             <button type="submit" class="btn btn-primary">se connecter</button>
                            </form>
