@@ -3,22 +3,15 @@ package com.eheio.pfa.controller;
 
 import java.util.List;
 
+import com.eheio.pfa.dao.*;
+import com.eheio.pfa.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import com.eheio.pfa.dao.ArticleRepository;
-import com.eheio.pfa.dao.ConcoursRepository;
-import com.eheio.pfa.dao.EvenementRepository;
-import com.eheio.pfa.dao.UtilisateurRepository;
-import com.eheio.pfa.entities.Article;
-import com.eheio.pfa.entities.Concours;
-import com.eheio.pfa.entities.Conseiller;
-import com.eheio.pfa.entities.Etudiant;
-import com.eheio.pfa.entities.Evenement;
 
 @Controller
 public class HomeController {
@@ -32,6 +25,12 @@ public class HomeController {
 	ArticleRepository articleRepository;
 	@Autowired
 	ConcoursRepository concoursRepository;
+	@Autowired
+	NiveauScolaireRepository niveauScolaireRepository;
+	@Autowired
+	EtablissementRepository etablissementRepository;
+	@Autowired
+	SecteurOrientationRepository secteurOrientationRepository;
 	
 	//page des evenements
 	@GetMapping(value="/evenement")
@@ -90,11 +89,15 @@ public class HomeController {
 	//inscription pour les etudeiants
 	@GetMapping("/inscreptionEtudiantForm")
 	public String FormInscription(Model model) {
+		List<NiveauScolaire> niveauScolaires = niveauScolaireRepository.findAll();
+		model.addAttribute("niveau",niveauScolaires);
+		List<Etablissement> etablissements = etablissementRepository.findAll();
+		model.addAttribute("etablissement",etablissements);
 		model.addAttribute("etudiant", new Etudiant());
 		return "inscription_form_etudiant";
 	}
 	@PostMapping(value="/inscriptionEtudiantSubmit")
-	public String inscriptionEtudiant(Etudiant etudiant) {
+	public String inscriptionEtudiant(Etudiant etudiant, Model model) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(etudiant.getPassword());
 		etudiant.setPassword(encodedPassword);
@@ -105,6 +108,10 @@ public class HomeController {
 	//inscription pour les conseillers
 	@GetMapping("/inscreptionConseillerForm")
 	public String FormInscriptionConseiller(Model model) {
+		List<Etablissement> etablissements = etablissementRepository.findAll();
+		List<SecteurOrientation> secteurOrientations=secteurOrientationRepository.findAll();
+		model.addAttribute("secteurOrientations",secteurOrientations);
+		model.addAttribute("etablissement",etablissements);
 		model.addAttribute("conseiller", new Conseiller());
 		return "inscription_form_conseiller";
 	}
