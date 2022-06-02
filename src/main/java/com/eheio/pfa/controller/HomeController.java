@@ -4,6 +4,7 @@ package com.eheio.pfa.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import com.eheio.pfa.entities.Evenement;
 
 @Controller
 public class HomeController {
+
 
 	@Autowired
 	UtilisateurRepository utilisateurRepository;
@@ -86,20 +88,34 @@ public class HomeController {
 	}
 	
 	//inscription pour les etudeiants
-	
-	@PostMapping(value="/inscriptione")
-	public String inscriptione(Etudiant e) {
-		utilisateurRepository.save(e);
-		return "index";
+	@GetMapping("/inscreptionEtudiantForm")
+	public String FormInscription(Model model) {
+		model.addAttribute("etudiant", new Etudiant());
+		return "inscription_form_etudiant";
+	}
+	@PostMapping(value="/inscriptionEtudiantSubmit")
+	public String inscriptionEtudiant(Etudiant etudiant) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(etudiant.getPassword());
+		etudiant.setPassword(encodedPassword);
+		utilisateurRepository.save(etudiant);
+		return "inscription_success";
 		
 	}
 	//inscription pour les conseillers
-	
-	@PostMapping(value="/inscriptionc")
-	 
-	public String inscriptionc(Conseiller c) {
-		utilisateurRepository.save(c);               
-		return "index";		
+	@GetMapping("/inscreptionConseillerForm")
+	public String FormInscriptionConseiller(Model model) {
+		model.addAttribute("conseiller", new Conseiller());
+		return "inscription_form_conseiller";
+	}
+	@PostMapping(value="/inscriptionConseillerSubmit")
+	public String inscriptionConseiller(Conseiller conseiller) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(conseiller.getPassword());
+		conseiller.setPassword(encodedPassword);
+		utilisateurRepository.save(conseiller);
+		return "inscription_success_conseiller";
+
 	}
 		
 }

@@ -21,6 +21,12 @@ public class SecurityController {
 				public String loginEtudiant() {
 					return "loginEtudiant";
 				}
+
+	        //page de login etudiant
+	        @GetMapping(value="/conseiller/loginConseiller")
+	        public String loginConseiller() {
+		return "loginConseiller";
+	}
 				
 			//forbidden
 			@GetMapping(value="/403")

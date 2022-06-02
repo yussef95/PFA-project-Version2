@@ -13,6 +13,7 @@
 <title>Page Login</title>
 </head>
 <body>
+
   <div id="fh5co-blog">
         <div class="container">
             <div class="row animate-box">
@@ -26,15 +27,14 @@
                         <div class="container mt-3">              
                           <form th:action="@{/admin/login}" method="POST">
                            <div class="mb-3 mt-3">
-                            <label for="email">Email:</label>
-                            <input type="email" name="email" required class="form-control" placeholder="Enter votre email" />
+                            <label for="nomUtilisateur">nomUtilisateur:</label>
+                            <input type="text" name="nomUtilisateur" required class="form-control" placeholder="Enter votre nomUtilisateur" />
                            </div>
                             <div class="mb-3">
                              <label for="password">Password:</label>
                              <input type="password" name="password" required class="form-control"  placeholder="Enter votre mot de passe" />
                             </div>
-                              <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
-
+                                <span th:if="${param.error}" >email ou mot de passe non valide</span>
                               <button type="submit" class="btn btn-primary">se connecter</button>
                            </form>
                          </div>

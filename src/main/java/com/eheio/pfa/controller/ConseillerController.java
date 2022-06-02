@@ -222,21 +222,21 @@ public class ConseillerController {
 		    
 		    @GetMapping(value = "/conseiller/monProfile")
 		    public String profile(String email,Model model) {
-		    ProfilData profilData=conseillerRepository.profileConseiller("conseiller1@gmail.com");
+		    ProfilData profilData=conseillerRepository.profileConseiller(email);
 		    //logger.info(profilData.getEmail());
 		    model.addAttribute("profilData", profilData);
 		    
 		    //voir mes publication
 		    List<ListDataEvenementProfile> dataEvenementProfiles=
-		    evenementRepository.listDataEvenementProfiles("conseiller1gmail.com");
+		    evenementRepository.listDataEvenementProfiles(email);
 		    model.addAttribute("listeEvenements", dataEvenementProfiles);
 		    
 		    List<ListDataArticleProfile> dataArticleProfiles=
-	        articleRepository.listDataArticleProfiles("conseiller1@gmail.com");
+	        articleRepository.listDataArticleProfiles(email);
 		    model.addAttribute("listeArticles", dataArticleProfiles);
 		    
 		    List<ListaDataConcoursProfile> dataConcoursProfiles=
-			concoursRepository.listaDataConcoursProfiles("conseiller1@gmail.com");
+			concoursRepository.listaDataConcoursProfiles(email);
 		    model.addAttribute("listeConcours", dataConcoursProfiles);
 		
 		    return "ProfileConseiller";
@@ -266,8 +266,8 @@ public class ConseillerController {
 		    
 		    //lister les messages pour le conseiller
 		    @GetMapping(value = "/conseiller/messagerie")
-		    public String messagerie (Model model) {
-		    	List<Message> messages=messageRepository.messages("conseiller1@gmail.com");
+		    public String messagerie (Model model,String email) {
+		    	List<Message> messages=messageRepository.messages(email);
 		    	model.addAttribute("message",messages );
 		    	return "messagerie";
 		    }

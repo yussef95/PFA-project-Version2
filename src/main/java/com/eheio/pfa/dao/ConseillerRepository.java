@@ -2,6 +2,7 @@ package com.eheio.pfa.dao;
 
 import java.util.List;
 
+import com.eheio.pfa.entities.Etudiant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -37,4 +38,7 @@ public interface ConseillerRepository extends JpaRepository<Conseiller, Integer>
 	        		+ " inner join secteur_orientation s on c.id_secteur_orientation=s.id where"
 	        		+ " c.id_etablissement=(select et.id_etablissement from etudiant et where et.email=?1 )",nativeQuery = true)
 	    	        public List<ProfilDataConseillerPourEtudiant> profileConseillerEtudiant(String email);
+
+	@Query("SELECT c FROM Conseiller c WHERE c.email = :email")
+	Conseiller findByEmail(@Param("email") String email);
 }

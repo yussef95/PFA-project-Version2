@@ -33,7 +33,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
                              <label for="password">Password:</label>
                              <input type="password" name="password" class="form-control"  placeholder="Enter votre mot de passe" />
                             </div>
-                            <button type="submit" class="btn btn-primary">se connecter</button>
+                              <span th:if="${param.error}" >email ou mot de passe non valide</span>
+                              <button type="submit" class="btn btn-primary">se connecter</button><br>
+                              <span>vous n'avez pas un compte?<a th:href="@{/inscreptionEtudiantForm}">Inscription</a></span>
                            </form>
                          </div>
                     </div>

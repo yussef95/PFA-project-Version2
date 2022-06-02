@@ -59,10 +59,10 @@ public class AdminController {
  
     @GetMapping(value="/admin/utilisateur")
 	public String utilisateur(Model model) {
-    	/*
+
 		List<Utilisateur> utilisateurs=utilisateurRepository.findAll();
 		model.addAttribute("listeutilisateurs", utilisateurs);
-    	*/
+
 		List<ListDataEtudiant> listEtudiant =etudiantRepository.listEtudiant();
 		model.addAttribute("listEtudiant", listEtudiant);
 		
@@ -73,13 +73,13 @@ public class AdminController {
 	}
  
  //supprimer un  utilisateur
- /*
+
  @GetMapping(value ="/deleteu")
 	public String deleteu(int id) {
 	    utilisateurRepository.deleteById(id);
 		return "redirect:/utilisateur";
 	}
- */
+
 //supprimer un  etudiant
  
 @GetMapping(value ="/admin/deletee/{idEtudiant}")
