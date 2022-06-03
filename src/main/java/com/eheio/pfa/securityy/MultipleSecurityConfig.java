@@ -83,7 +83,7 @@ public class MultipleSecurityConfig  {
 	@Configuration
 	@Order(2)
 
-	public  static class EtudiantConfiguration extends WebSecurityConfigurerAdapter {
+	public   class EtudiantConfiguration extends WebSecurityConfigurerAdapter {
 		public  EtudiantConfiguration(){
 			super();
 		}

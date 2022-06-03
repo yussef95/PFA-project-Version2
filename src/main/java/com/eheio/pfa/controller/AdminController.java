@@ -60,9 +60,10 @@ public class AdminController {
     @GetMapping(value="/admin/utilisateur")
 	public String utilisateur(Model model) {
 
+		/*
 		List<Utilisateur> utilisateurs=utilisateurRepository.findAll();
 		model.addAttribute("listeutilisateurs", utilisateurs);
-
+        */
 		List<ListDataEtudiant> listEtudiant =etudiantRepository.listEtudiant();
 		model.addAttribute("listEtudiant", listEtudiant);
 		
