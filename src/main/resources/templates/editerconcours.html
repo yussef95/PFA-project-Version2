@@ -24,12 +24,12 @@ label {
     <div class="form-group">
       <label for="titre">Titre:</label>
       <input type="text" class="form-control" id="titre" placeholder="Enter votre titre ici" th:value="${concours.titre}" name="titre">
-      <span class="red" th:errors=${concours.titre}></span>
+      <span class="red" th:errors="${concours.titre}"></span>
     </div>
     <div class="form-group">
       <label for="description">Description:</label>
       <input type="text" class="form-control" id="description" placeholder="Enter votre description ici" th:value="${concours.description}" name="description">
-      <span class="red" th:errors=${concours.titre}></span>
+      <span class="red" th:errors="${concours.titre}"></span>
     </div>
     <button type="submit" class="btn btn-primary">valider</button>
   </form>

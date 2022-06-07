@@ -6,14 +6,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 
+
 @Entity
 @PrimaryKeyJoinColumn( name = "idUtilisateur" )
 
 public class Etudiant extends Utilisateur {
 	
+	@NotNull
 	private String email;
+	@NotNull
 	private String password;
+	@NotNull
 	private String nomUtilisateur;
+	@NotNull
 	private String nomComplet;
 	@ManyToOne
 	@JoinColumn(name = "id_niveauScolaire")

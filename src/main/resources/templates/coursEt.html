@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{EtudiantTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Publications</title>
+</head>
+
+<body>
+
+ <div layout:fragment="content">
+ <br>
+ <br>
+ <br>
+  <div class="container">
+     
+      <table class="table table-striped">
+                    <tr>
+                    <th>id</th><th>titre</th><th>description</th><th>publié par</th>
+                    </tr>
+                    <tr th:each="c:${}">
+                    <td th:text="${c.}"></td>    
+                    <td th:text="${c.}"></td>
+                    <td th:text="${c.}"></td>
+                    <td th:text="${c.}"></td> 
+                    </tr>
+      </table>
+</div>      
+</div>
+</body>
+</html>

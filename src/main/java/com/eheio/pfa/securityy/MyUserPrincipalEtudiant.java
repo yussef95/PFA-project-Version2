@@ -1,11 +1,14 @@
+
 package com.eheio.pfa.securityy;
 
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import com.eheio.pfa.entities.Etudiant;
+
 
 public class MyUserPrincipalEtudiant implements UserDetails {
 

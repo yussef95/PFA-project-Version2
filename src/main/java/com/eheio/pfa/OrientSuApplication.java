@@ -37,8 +37,10 @@ import com.eheio.pfa.entities.Utilisateur;
 @SpringBootApplication
 public class OrientSuApplication  implements CommandLineRunner {
 
+
 	 @Autowired
 	 private PasswordEncoder passwordEncoder;
+
 	 @Autowired
 	 private UtilisateurRepository utilisateurRepository;
 	 @Autowired

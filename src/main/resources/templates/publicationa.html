@@ -77,6 +77,22 @@
                     <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deletea(id=${a.id_publication})}">supprimer</a></td>
                     </tr>
       </table>
+      <br>
+      <h3 style="text-align: center; color: blue;">les Listes des Cours</h3>
+      <br>
+      <br>
+       <table class="table table-striped">
+                    <tr>
+                    <th>id</th><th>titre</th><th>description</th><th>publié par</th><th>Action</th>
+                    </tr>
+                    <tr th:each="c:${Cours}">
+                    <td th:text="${c.id}"></td>    
+                    <td th:text="${c.titre}"></td>
+                    <td th:text="${c.description}"></td>
+                    <td th:text="${c.nom_complet}"></td> 
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deleteCours(id=${c.id})}">supprimer</a></td>
+                    </tr>
+      </table>
 </div>      
 </div>
 </body>

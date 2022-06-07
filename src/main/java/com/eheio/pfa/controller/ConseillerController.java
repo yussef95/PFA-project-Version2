@@ -6,10 +6,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,12 +60,12 @@ public class ConseillerController {
 	
 	//lister tous les  publications(concours,evenements,article) et voir qui est le publicateur.
 	
-	@GetMapping(value="/conseiller/publications")
+	    @GetMapping(value="/conseiller/publications")
 	    public String publication(Model model) {
-		
+		/*
 		List<Publication> publications=publicationRepository.findAll();
 		model.addAttribute("listePublications", publications);
-		
+		*/
 		List<ListDataEvenement> evenements=evenementRepository.ListDataEvenement();
 		model.addAttribute("listeEvenements", evenements);
 		
@@ -76,64 +79,68 @@ public class ConseillerController {
 	
 	//supprimer un publication
 	
-	@GetMapping(value ="/conseiller/deletepc")
-	public String deletep(int id) {
+	    /*
+	    @GetMapping(value ="/conseiller/deletepc")
+	    public String deletep(int id) {
 		publicationRepository.deleteById(id);
 		return "redirect:/conseiller/monProfile";
 	}
+	    */
 	
 	
 	//supprimer un  article
 	 
-	@GetMapping(value ="/conseiller/deleteac")
+	    @GetMapping(value ="/conseiller/deleteac")
 		public String deletea(int id) {
 		articleRepository.deleteById(id);
-			return "redirect:/conseiller/monProfile";
+		return "redirect:/conseiller/monProfile";
 		}
 
 	//supprimer un  evenement
 
-	@GetMapping(value ="/conseiller/deleteevc")
+	    @GetMapping(value ="/conseiller/deleteevc")
 		public String deleteev(int id) {
 		evenementRepository.deleteById(id);
-			return "redirect:/conseiller/monProfile";
+		return "redirect:/conseiller/monProfile";
 		}
 
 	//supprimer un  concours
 
-	@GetMapping(value ="/conseiller/deletecnc")
+	   @GetMapping(value ="/conseiller/deletecnc")
 		public String deletecn(int id) {
 		concoursRepository.deleteById(id);
-			return "redirect:/conseiller/monProfile";
+		return "redirect:/conseiller/monProfile";
 		}
 	
 	//ajouter un publication(Evenement,Concours,Article)
 	
-
 	@GetMapping(value="/conseiller/nouveauEvenement")
 	public String nouveauEvenement(Model model) {
-		model.addAttribute("evenement",new Evenement());
-		return "nouveauformeEvenement";
+	model.addAttribute("evenement",new Evenement());
+	return "nouveauformeEvenement";
 	}
 	@PostMapping(value="/conseiller/ajoutee")
-	public String ajoutere( Evenement e) {
-		evenementRepository.save(e);
-		return "redirect:/conseiller/publications";
+	public String ajoutere(@Valid Evenement e,BindingResult result) {
+	if(result.hasErrors()) return "nouveauformeEvenement";
+	Conseiller c=conseillerRepository.findByEmail("conseiller1@gmail.com");
+	e.setConseiller(c);
+	publicationRepository.save(e);
+	return "redirect:/conseiller/publications";
 	}
 	
 	//formulaire d'ajoute de concours
 	
 	@GetMapping(value="/conseiller/nouveauConcours")
 	public String nouveauConcours(Model model) {
-		model.addAttribute("concours",new Concours());
-		return "nouveauformeConcours";
+	model.addAttribute("concours",new Concours());
+	return "nouveauformeConcours";
 	}
 	
 	@PostMapping(value="/conseiller/ajoutec")
-	public String ajouterc( Concours c) {
-		
-		publicationRepository.save(c);
-		return "redirect:/conseiller/publications";
+	public String ajouterc(@Valid Concours c,Conseiller cn,BindingResult result) {
+	if(result.hasErrors()) return "nouveauformeConcours";	
+	publicationRepository.save(c);
+	return "redirect:/conseiller/publications";
 	}
 	
 	//formulaire d'ajoute de l'article
@@ -145,30 +152,29 @@ public class ConseillerController {
 		}
 	
 	@PostMapping(value="/conseiller/ajoutea")
-	public String ajoutera( Article a) {
-		
-		publicationRepository.save(a);
-		return "redirect:/conseiller/publications";
+	public String ajoutera(@Valid Article a,Conseiller cn,BindingResult result) {
+	if(result.hasErrors()) return "nouveauformeArticle";		
+	publicationRepository.save(a);
+	return "redirect:/conseiller/publications";
 	}
 	
-	   //editer un evenement
+	//editer un evenement
 	
-	   @GetMapping(value = "/conseiller/editee/{idEvenement}")
-
+	    @GetMapping(value = "/conseiller/editee/{idEvenement}")
 	    public String editeeforme(Model model,@PathVariable int idEvenement) {
 		Optional<Evenement> e=evenementRepository.findById(idEvenement);
 		model.addAttribute("evenement", e.get());
 		return "editerevenement";	
 	    }
 	   
-	    @PostMapping(value = "/conseiller/edite/{idEvenement}")
-	    public String editee(  Evenement e,@PathVariable int idEvenement) {
-	    	
+	        @PostMapping(value = "/conseiller/edite/{idEvenement}")
+	        public String editee( @Valid Evenement e,@PathVariable int idEvenement,BindingResult result) {
 			Optional<Evenement> evbag=evenementRepository.findById(idEvenement);
 			Evenement evenement=evbag.get();
 			evenement.setConseiller(e.getConseiller());
 			evenement.setTitre(e.getTitre());
 			evenement.setDescription(e.getDescription());
+			if(result.hasErrors()) return "editerevenement";		
 			evenementRepository.save(evenement);
 			return "redirect:/conseiller/publications";
 
@@ -184,19 +190,20 @@ public class ConseillerController {
 		    }
 		    
 		    @PostMapping(value = "/conseiller/edita/{id}")
-		    public String editea( Article a,@PathVariable int id) {
+		    public String editea(@Valid Article a,@PathVariable int id,BindingResult result) {
 		    	
-				Optional<Article> avbag=articleRepository.findById(id);
-				Article article=avbag.get();
-				article.setConseiller(a.getConseiller());
-				article.setTitre(a.getTitre());
-				article.setDescription(a.getDescription());
-				articleRepository.save(article);
-				return "redirect:/conseiller/publications";
+			Optional<Article> avbag=articleRepository.findById(id);
+			Article article=avbag.get();
+            article.setConseiller(a.getConseiller());
+			article.setTitre(a.getTitre());
+			article.setDescription(a.getDescription());
+			if(result.hasErrors()) return "editerarticle";		
+			articleRepository.save(article);
+			return "redirect:/conseiller/publications";
 
 		    }
 		  
-		  //editer un concours
+		   //editer un concours
 			
 		    @GetMapping(value = "/conseiller/editec/{idConcours}")
 		    public String editecforme(Model model,@PathVariable int idConcours) {
@@ -205,14 +212,15 @@ public class ConseillerController {
 			return "editerconcours";	
 		    }
 		    
-		    @PostMapping(value = "/conseiller/editc/{idConcours}")
-		    public String editec( Concours c,@PathVariable int idConcours) {
+		        @PostMapping(value = "/conseiller/editc/{idConcours}")
+		        public String editec(@Valid Concours c,@PathVariable int idConcours,BindingResult result) {
 		    	
 				Optional<Concours> cvbag=concoursRepository.findById(idConcours);
 				Concours concours=cvbag.get();
 				concours.setConseiller(c.getConseiller());
 				concours.setTitre(c.getTitre());
 				concours.setDescription(c.getDescription());
+				if(result.hasErrors()) return "editerconcours";		
 				concoursRepository.save(concours);
 				return "redirect:/conseiller/publications";
 
@@ -221,22 +229,22 @@ public class ConseillerController {
 		    //Affichage de profile et voir mes publication
 		    
 		    @GetMapping(value = "/conseiller/monProfile")
-		    public String profile(String email,Model model) {
-		    ProfilData profilData=conseillerRepository.profileConseiller(email);
+		    public String profile(String email,Model model,Authentication authentication) {
+		    ProfilData profilData=conseillerRepository.profileConseiller(authentication.getName());
 		    //logger.info(profilData.getEmail());
 		    model.addAttribute("profilData", profilData);
 		    
 		    //voir mes publication
 		    List<ListDataEvenementProfile> dataEvenementProfiles=
-		    evenementRepository.listDataEvenementProfiles(email);
+		    evenementRepository.listDataEvenementProfiles(authentication.getName());
 		    model.addAttribute("listeEvenements", dataEvenementProfiles);
 		    
 		    List<ListDataArticleProfile> dataArticleProfiles=
-	        articleRepository.listDataArticleProfiles(email);
+	        articleRepository.listDataArticleProfiles(authentication.getName());
 		    model.addAttribute("listeArticles", dataArticleProfiles);
 		    
 		    List<ListaDataConcoursProfile> dataConcoursProfiles=
-			concoursRepository.listaDataConcoursProfiles(email);
+			concoursRepository.listaDataConcoursProfiles(authentication.getName());
 		    model.addAttribute("listeConcours", dataConcoursProfiles);
 		
 		    return "ProfileConseiller";
@@ -246,20 +254,21 @@ public class ConseillerController {
 		    
 		    @GetMapping(value = "/conseiller/editeProfilec/{id}")
 		    public String editeConseiller(Model model,@PathVariable int id) {
-		    	Optional<Conseiller> c=conseillerRepository.findById(id);
-		    	model.addAttribute("conseiller", c.get());
-		    	return "editProfileConseiller";
+		    Optional<Conseiller> c=conseillerRepository.findById(id);
+		    model.addAttribute("conseiller", c.get());
+		    return "editProfileConseiller";
 		    }
 		    
-		    @PostMapping(value = "/conseiller/editeProfilec/{id}")
-		    public String editeConseiller(Conseiller c, @PathVariable int id) {
+		          @PostMapping(value = "/conseiller/editeProfilec/{id}")
+		           public String editeConseiller(@Valid Conseiller c, @PathVariable int id,BindingResult result) {
 		    	
-		    	   Optional<Conseiller> cbag=conseillerRepository.findById(id);
-		    	   Conseiller conseiller=cbag.get();
+		           Optional<Conseiller> cbag=conseillerRepository.findById(id);
+		     	   Conseiller conseiller=cbag.get();
 		    	   conseiller.setNomComplet(c.getNomComplet());
 		    	   conseiller.setnomUtilisateur(c.getnomUtilisateur());
 		    	   conseiller.setOrientation(c.getOrientation());
 		    	   conseiller.setEtablissement(c.getEtablissement());
+				   if(result.hasErrors()) return "editProfileConseiller";		
 		    	   conseillerRepository.save(conseiller);
 		    	   return "redirect:/conseiller/monProfile";
 		    }
@@ -267,9 +276,9 @@ public class ConseillerController {
 		    //lister les messages pour le conseiller
 		    @GetMapping(value = "/conseiller/messagerie")
 		    public String messagerie (Model model,String email) {
-		    	List<Message> messages=messageRepository.messages(email);
-		    	model.addAttribute("message",messages );
-		    	return "messagerie";
+		    List<Message> messages=messageRepository.messages(email);
+		    model.addAttribute("message",messages );
+		    return "messagerie";
 		    }
 		    
 	

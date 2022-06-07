@@ -1,3 +1,4 @@
+
 package com.eheio.pfa.securityy;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +18,21 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-public class MultipleSecurityConfig  {
+public class MultipleSecurityConfig {
+
 	@Configuration
 	@Order(1)
-	public  static class AdminConfiguration extends WebSecurityConfigurerAdapter {
-
-        public  AdminConfiguration(){
-			super();
-		}
-
+	public static class AdminConfiguration extends WebSecurityConfigurerAdapter {
 
 		@Autowired
-		AdminDetailsService adminDetailsService;
+		private AdminDetailsService adminDetailsService;
 
 		protected void configure(HttpSecurity http) throws Exception {
 
-			/*
-			http.csrf().disable();
+			        /*
+			        http.csrf().disable();
 
-			http
+			         http
 					.antMatcher("/admin/**")
 					.authorizeRequests()
 					.anyRequest()
@@ -46,7 +43,8 @@ public class MultipleSecurityConfig  {
 					.usernameParameter("nomUtilisateur")
 					.defaultSuccessUrl("/admin/ProfileAdmin")
 					.permitAll();
-          */
+                     */
+
 			         http.requestMatcher(new AntPathRequestMatcher("/admin/**"))
 					.csrf().disable()
 					.authorizeRequests()
@@ -54,8 +52,6 @@ public class MultipleSecurityConfig  {
 					.and().formLogin()
 					.loginPage("/admin/login").permitAll().usernameParameter("nomUtilisateur")
 					.passwordParameter("password").defaultSuccessUrl("/admin/ProfileAdmin");
-
-
 
 		}
 
@@ -79,16 +75,13 @@ public class MultipleSecurityConfig  {
 		}
 	}
 
-
 	@Configuration
 	@Order(2)
 
-	public   class EtudiantConfiguration extends WebSecurityConfigurerAdapter {
-		public  EtudiantConfiguration(){
-			super();
-		}
+	public static class ConseillerConfiguration extends WebSecurityConfigurerAdapter {
+
 		@Autowired
-		EtudiantDetailsService service;
+		private ConseillerDetailsService conseillerDetailsServiceservice;
 
 		protected void configure(HttpSecurity http) throws Exception {
 
@@ -96,56 +89,6 @@ public class MultipleSecurityConfig  {
 			http.csrf().disable();
 
 			http
-					.antMatcher("/etudiant/**")
-					.authorizeRequests()
-					.anyRequest()
-					.authenticated()
-
-					.and()
-				    .formLogin()
-				    .loginPage("/etudiant/loginEtudiant")
-					.usernameParameter("email")
-					.defaultSuccessUrl("/etudiant/ProfileEtudiant")
-				    .permitAll();
-
-
-
-	}
-		@Override
-		protected void configure(AuthenticationManagerBuilder auth)  {
-			auth.authenticationProvider(authenticationProvider());
-
-		}
-
-		@Bean
-		DaoAuthenticationProvider authenticationProvider() {
-			DaoAuthenticationProvider daoauthenticationProvider=new DaoAuthenticationProvider();
-			daoauthenticationProvider.setPasswordEncoder(passwordEncoder());
-			daoauthenticationProvider.setUserDetailsService(service);
-			return daoauthenticationProvider;
-		}
-		@Bean
-		PasswordEncoder passwordEncoder() {
-			return new BCryptPasswordEncoder();
-
-		}
-	}
-	@Configuration
-	@Order(3)
-
-	public  static class  ConseillerConfiguration extends WebSecurityConfigurerAdapter {
-		public  ConseillerConfiguration(){
-			super();
-		}
-		@Autowired
-		ConseillerDetailsService conseillerDetailsServiceservice;
-
-		protected void configure(HttpSecurity http) throws Exception {
-
-
-			http.csrf().disable();
-
-			         http
 					.antMatcher("/conseiller/**")
 					.authorizeRequests()
 					.anyRequest()
@@ -159,26 +102,74 @@ public class MultipleSecurityConfig  {
 					.permitAll();
 
 
-
 		}
+
 		@Override
-		protected void configure(AuthenticationManagerBuilder auth)  {
+		protected void configure(AuthenticationManagerBuilder auth) {
 			auth.authenticationProvider(authenticationProvider());
 
 		}
 
 		@Bean
 		DaoAuthenticationProvider authenticationProvider() {
-			DaoAuthenticationProvider daoauthenticationProvider=new DaoAuthenticationProvider();
+			DaoAuthenticationProvider daoauthenticationProvider = new DaoAuthenticationProvider();
 			daoauthenticationProvider.setPasswordEncoder(passwordEncoder());
 			daoauthenticationProvider.setUserDetailsService(conseillerDetailsServiceservice);
 			return daoauthenticationProvider;
 		}
+
 		@Bean
 		PasswordEncoder passwordEncoder() {
 			return new BCryptPasswordEncoder();
 
 		}
 	}
+
+	@Configuration
+	@Order(3)
+	public static class EtudianConfiguration extends WebSecurityConfigurerAdapter{
+
+		@Autowired
+		private EtudiantDetailsService service;
+		protected void Configure(HttpSecurity http) throws Exception{
+			      http.csrf().disable();
+
+			         http
+					.antMatcher("/etudiant/**")
+					.authorizeRequests()
+					.anyRequest()
+					.authenticated()
+
+					.and()
+					.formLogin()
+					.loginPage("/etudiant/loginEtudiant")
+					.usernameParameter("email")
+					.defaultSuccessUrl("/etudiant/ProfileEtudiant")
+					.permitAll();
+		}
+		    protected void configure(AuthenticationManagerBuilder auth)  {
+			auth.authenticationProvider(authenticationProvider());
+
+		}
+		    @Bean
+		    DaoAuthenticationProvider authenticationProvider() {
+			DaoAuthenticationProvider daoauthenticationProvider=new DaoAuthenticationProvider();
+			daoauthenticationProvider.setPasswordEncoder(passwordEncoder());
+			daoauthenticationProvider.setUserDetailsService(service);
+			return daoauthenticationProvider;
+		}
+		@Bean
+		PasswordEncoder passwordEncoder() {
+			return new BCryptPasswordEncoder();
+		}
+
+	}
+
 }
 
+
+	
+	
+
+
+	

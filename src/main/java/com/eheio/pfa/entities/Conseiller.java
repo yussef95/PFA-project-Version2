@@ -7,16 +7,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @PrimaryKeyJoinColumn( name = "idUtilisateur" )
 
 public class Conseiller extends Utilisateur {
 	
+	@Email
+	@NotNull
 	private String email;
+	@NotNull
 	private String password;
+	@NotNull
 	public String nomUtilisateur;
 	private boolean isaprouv;
+	@NotNull
 	private String nomComplet;
 	
 	@OneToMany(mappedBy = "conseiller",fetch = FetchType.LAZY )

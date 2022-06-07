@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{ProfesseurTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Mon Profile</title>
+</head>
+<body>
+      <div layout:fragment="content">
+      <br>
+      <br>
+      <div class="container">
+      <h3 style="text-align: center; color: blue;">Mes Informations Personnels</h3>
+      <br>
+      <table class="table table-striped">
+                    <tr>
+                    <th>idUtilisateur</th><th>SecteurOrientation</th><th>etablissement</th><th>Nom Complet</th><th>Email</th><th>Nom Utilisateur</th><th>Action</th>
+                    </tr>
+                    <tr th:each="pd:${profilDataProf}">
+                    <td th:text="${pd.id_utilisateur}"></td>
+                    <td th:text="${pd.libelles}"></td> 
+                    <td th:text="${pd.libellee}"></td>
+                    <td th:text="${pd.nom_complet}"></td> 
+                    <td th:text="${pd.email}"></td>
+                    <td th:text="${pd.nom_utilisateur}"></td>
+                    <td><a th:href="@{/prof/editepr/{id}(id=${pd.id_utilisateur})}">Editer</a></td> 
+                    </tr>
+                    
+      </table>
+      <br>
+      <br>
+     
+     
+     <h3 style="text-align: center; color: blue;">les Listes des Cours</h3>
+     <br>
+     <table class="table table-striped">
+                    <tr>
+                    <th>id</th><th>titre</th><th>description</th><th>Action</th>
+                    </tr>
+                    <tr th:each="c:${listeCours}">
+                    <td th:text="${c.id}"></td>    
+                    <td th:text="${c.titre}"></td>
+                    <td th:text="${c.description}"></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/prof/deleteCours(id=${c.id})}">supprimer</a></td> 
+                    <td><a th:href="@{/prof/editeCours/{id}(id=${c.id})}">Editer</a></td>  
+                    </tr>
+                    
+      </table>
+      
+    
+</div>
+</div>
+</body>
+</html>

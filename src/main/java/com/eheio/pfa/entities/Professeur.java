@@ -10,20 +10,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 
 @Entity
 @PrimaryKeyJoinColumn( name = "idUtilisateur" )
 
 public class Professeur extends Utilisateur{
-	
+	@NotNull
+	@Email
 	private String email;
+	@NotNull
 	private String password;
+	@NotNull
 	public String nomUtilisateur;
+	@NotNull
 	private boolean isaprouv;
+	@NotNull
 	private String nomComplet;
-	
-	
-	
 	
 	@ManyToOne
 	@JoinColumn(name = "id_etablissement")
@@ -34,6 +39,7 @@ public class Professeur extends Utilisateur{
 	private SecteurOrientation orientation;
 
 	@OneToMany(mappedBy = "professeur",fetch = FetchType.LAZY )
+
 	private Collection<Cours> cours;
 	
 	

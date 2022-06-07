@@ -10,33 +10,42 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eheio.pfa.dao.AdminRepository;
 import com.eheio.pfa.dao.ArticleRepository;
 import com.eheio.pfa.dao.ConcoursRepository;
 import com.eheio.pfa.dao.ConseillerRepository;
+import com.eheio.pfa.dao.CoursRepository;
 import com.eheio.pfa.dao.EtudiantRepository;
 import com.eheio.pfa.dao.EvenementRepository;
+import com.eheio.pfa.dao.ProfesseurRepository;
 import com.eheio.pfa.dao.PublicationRepository;
 import com.eheio.pfa.dao.UtilisateurRepository;
 import com.eheio.pfa.dto.ListDataAdmin;
 import com.eheio.pfa.dto.ListDataArticle;
 import com.eheio.pfa.dto.ListDataConcours;
+import com.eheio.pfa.dto.ListDataCoursAll;
 import com.eheio.pfa.dto.ListDataEtudiant;
 import com.eheio.pfa.dto.ListDataEvenement;
+import com.eheio.pfa.dto.ListDataProfesseur;
 import com.eheio.pfa.dto.ProfilData;
 import com.eheio.pfa.entities.Admin;
 import com.eheio.pfa.entities.Article;
 import com.eheio.pfa.entities.Concours;
 import com.eheio.pfa.entities.Conseiller;
+import com.eheio.pfa.entities.Cours;
 import com.eheio.pfa.entities.Etudiant;
 import com.eheio.pfa.entities.Evenement;
+import com.eheio.pfa.entities.Professeur;
 import com.eheio.pfa.entities.Publication;
 import com.eheio.pfa.entities.Utilisateur;
 
 @Controller
 public class AdminController {
 
+ @Autowired
+ CoursRepository coursRepository;
  @Autowired
  private AdminRepository adminRepository;
  @Autowired
@@ -53,12 +62,14 @@ public class AdminController {
  private EvenementRepository evenementRepository;
  @Autowired
  private ArticleRepository articleRepository;
+ @Autowired
+ private ProfesseurRepository professeurRepository;
  
- //lister tous les utilisateur(conseillers et etudiants) avec ses etablissements et secteur pour conseillers,
+ //lister tous les utilisateur(conseillers,professeur et etudiants) avec ses etablissements et secteur pour conseillers,prof
  //niveau pour etudiants.
  
-    @GetMapping(value="/admin/utilisateur")
-	public String utilisateur(Model model) {
+       @GetMapping(value="/admin/utilisateur")
+	   public String utilisateur(Model model) {
 
 		/*
 		List<Utilisateur> utilisateurs=utilisateurRepository.findAll();
@@ -69,33 +80,47 @@ public class AdminController {
 		
 		List<ListDataAdmin> listConseiller =conseillerRepository.listConseiller();
 	    model.addAttribute("listConseiller", listConseiller);
+	    
+	    List<ListDataProfesseur> listProf =professeurRepository.listProf();
+	    model.addAttribute("listProf", listProf);
 		 
 		return "utilisateurs";
 	}
  
- //supprimer un  utilisateur
-
- @GetMapping(value ="/deleteu")
-	public String deleteu(int id) {
+       //supprimer un  utilisateur
+        /*
+        @GetMapping(value ="/deleteu")
+	    public String deleteu(int id) {
 	    utilisateurRepository.deleteById(id);
 		return "redirect:/utilisateur";
 	}
-
-//supprimer un  etudiant
+        */
+       
+     //supprimer un  etudiant
  
-@GetMapping(value ="/admin/deletee/{idEtudiant}")
-	public String deletee(@PathVariable int idEtudiant) {
-	    etudiantRepository.deleteById(idEtudiant);
-		return "redirect:/admin/utilisateur";
+     @GetMapping(value ="/admin/deletee/{idEtudiant}")
+	 public String deletee(@PathVariable int idEtudiant) {
+	 etudiantRepository.deleteById(idEtudiant);
+	 return "redirect:/admin/utilisateur";
 	}
 
-//supprimer un  conseiller
+    //supprimer un  conseiller
 
-@GetMapping(value ="/admin/deletec/{idConseiller}")
+    @GetMapping(value ="/admin/deletec/{idConseiller}")
 	public String deletec(@PathVariable int idConseiller) {
 	conseillerRepository.deleteById(idConseiller);
-		return "redirect:/admin/utilisateur";
+	return "redirect:/admin/utilisateur";
 	}
+    
+    //supprimer un professeur
+    
+    @GetMapping(value ="/admin/delete/{id}")
+   	public String deletepr(@PathVariable int id) {
+    professeurRepository.deleteById(id);
+   	return "redirect:/admin/utilisateur";
+   	}
+
+    
 
     //lister les publications pour l admin et voir le nom complet de publicateur
 
@@ -114,18 +139,23 @@ public class AdminController {
 	List<ListDataArticle> articles=articleRepository.ListDataArticle();
 	model.addAttribute("listearticles",articles );
 	
+	List<ListDataCoursAll> cours=coursRepository.dataCoursAlls();
+	model.addAttribute("Cours", cours);
+	
 	return "publicationa";
     }
     
-		//supprimer un  Publication
+           /*
+		   //supprimer un  Publication
 		 
 		    @GetMapping(value ="/admin/deletep")
 			public String deletep(int id) {
 			publicationRepository.deleteById(id);
 	        return "redirect:/admin/publication";
 			}
+			*/
 		 
-		//supprimer un  article
+		   //supprimer un  article
 		 
 		    @GetMapping(value ="/admin/deletea")
 			public String deletea(int id) {
@@ -133,7 +163,7 @@ public class AdminController {
 		    return "redirect:/admin/publication";
 			}
 
-		//supprimer un  evenement
+		    //supprimer un  evenement
 
 		    @GetMapping(value ="/admin/deleteev")
 			public String deleteev(int id) {
@@ -141,26 +171,48 @@ public class AdminController {
 			return "redirect:/admin/publication";
 			}
 
-		//supprimer un  concours
+		    //supprimer un  concours
 
 		    @GetMapping(value ="/admin/deletecn")
 			public String deletecn(int id) {
 			concoursRepository.deleteById(id);
 			return "redirect:/admin/publication";
 			}
+		    
+		    //supprimer un  cours
+
+		    @GetMapping(value ="/admin/deleteCours")
+			public String deleteCours(int id) {
+			coursRepository.deleteById(id);
+			return "redirect:/admin/publication";
+			}
 	
-		   //Approuver un conseiller
-		   @GetMapping(value = "/admin/approuv/{idConseiller}")
-			public String approuver(@PathVariable int idConseiller ) {
-		    Optional<Conseiller> c=conseillerRepository.findById(idConseiller);
-		    //if(!c.isEmpty()) {
+		        //Approuver un conseiller
+		    
+		        @GetMapping(value = "/admin/approuv/{idConseiller}")
+			    public String approuver(@PathVariable int idConseiller ) {
+		        Optional<Conseiller> c=conseillerRepository.findById(idConseiller);
+		        if(!c.isEmpty()) {
 		    	Conseiller conseiller=c.get();
 		    	conseiller.setIsaprouv(true);
 		    	conseillerRepository.save(conseiller);
+		    }
 		    	return "redirect:/admin/utilisateur";
-		    	//il faut mettre une page 404...
-		    //}
-		   // return "404";
+			
+		}
+		        
+		        //Approuver un prof
+		        
+		        @GetMapping(value = "/admin/approuvProf/{id}")
+			    public String approuverProf(@PathVariable int id ) {
+		        Optional<Professeur> p=professeurRepository.findById(id);
+		        if(!p.isEmpty()) {
+		    	Professeur professeur=p.get();
+		    	professeur.setIsaprouv(true);
+		    	professeurRepository.save(professeur);
+		    }
+		    	return "redirect:/admin/utilisateur";
+
 			
 		}
 		   
@@ -176,6 +228,7 @@ public class AdminController {
 		    }
 		    
 		    //editer le profile
+		    
 		    @GetMapping(value = "/admin/editeProfileA/{id}")
 		    public String editeAdmin(Model model,@PathVariable int id) {
 			Optional<Admin> a =adminRepository.findById(id);
@@ -183,8 +236,8 @@ public class AdminController {
 			return "editeProfileAdmin";	
 		    }
 		    
-		    @PostMapping(value = "/admin/editeProfileA/{id}")
-		    public String editeAdmin( Admin a,@PathVariable int id) {
+		        @PostMapping(value = "/admin/editeProfileA/{id}")
+		        public String editeAdmin( Admin a,@PathVariable int id) {
 				Optional<Admin> adbag=adminRepository.findById(id);
 				Admin admin=adbag.get();
 				admin.setEmail(a.getEmail());

@@ -22,13 +22,13 @@ label {
   <form th:action="@{/conseiller/ajoutea}" method="post">
     <div class="form-group">
       <label for="titre">Titre:</label>
-      <input type="text" class="form-control" id="titre" placeholder="Enter votre titre ici" name="titre">
-      <span class="red" th:errors=${article.description}></span>
+      <input type="text" class="form-control" id="titre" placeholder="Enter votre titre ici" name="titre" th:value="${article.titre}">
+      <span class="red" th:errors="${article.description}"></span>
     </div>
     <div class="form-group">
       <label for="description">Description:</label>
-      <input type="text" class="form-control" id="description" placeholder="Enter votre description ici" name="description">
-      <span class="red" th:errors=${article.description}></span>
+      <input type="text" class="form-control" id="description" placeholder="Enter votre description ici" name="description" th:value="${article.description}">
+      <span class="red" th:errors="${article.description}"></span>
     </div>
     <button type="submit" class="btn btn-primary">valider</button>
   </form>

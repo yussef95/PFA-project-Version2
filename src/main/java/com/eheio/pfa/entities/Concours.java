@@ -3,6 +3,7 @@ package com.eheio.pfa.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotNull;
 
 
 
@@ -11,7 +12,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 public class Concours extends Publication {
 	
+	@NotNull
 	private String titre;
+	@NotNull
 	@Column(columnDefinition = "TEXT")
 	private String description;
 

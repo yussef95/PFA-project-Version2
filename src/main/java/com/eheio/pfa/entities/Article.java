@@ -4,15 +4,19 @@ package com.eheio.pfa.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotNull;
 
 
 
 @Entity
 @PrimaryKeyJoinColumn( name = "idPublication" )
 
+
 public class Article extends Publication{
 	
-	private String titre;
+	@NotNull
+ 	private String titre;
+	@NotNull
 	@Column(columnDefinition = "TEXT")
 	private String description;
 

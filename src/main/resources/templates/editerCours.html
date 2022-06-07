@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{ProfesseurTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Editer cours</title>
+<style type="text/css">
+h2{
+color: blue;
+}
+label {
+	color: blue;
+}
+</style>
+</head>
+<body>
+
+ <div layout:fragment="content">
+
+<div class="container">
+  <h2>Editer Cours</h2>
+  <form th:action="@{/prof/editeCours/{id}(id=${cours.id})}" method="post">
+    <div class="form-group">
+      <label for="titre">Titre:</label>
+      <input type="text" class="form-control" id="titre" placeholder="Enter votre titre ici" th:value="${cours.titre}" name="titre">
+      <span class="red" th:errors="${cours.titre}"></span>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" class="form-control" id="description" placeholder="Enter votre description ici" th:value="${cours.description}" name="description">
+      <span class="red" th:errors="${cours.description}"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">valider</button>
+  </form>
+</div>
+</div>
+</body>
+</html>

@@ -3,14 +3,16 @@ package com.eheio.pfa.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @PrimaryKeyJoinColumn( name = "idPublication" )
 
 public class Evenement extends Publication {
 	
+	@NotNull
 	private String titre;
-	
+	@NotNull
 	@Column(columnDefinition = "TEXT")
 	private String description;
 

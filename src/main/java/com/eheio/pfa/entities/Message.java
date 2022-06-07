@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -16,9 +18,13 @@ public class Message implements Serializable {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotNull
 	private String objet;
+	@NotNull
 	@Column(columnDefinition = "TEXT")
 	private String description;
+	@NotNull
+	@Email
 	private String email;
 	
 	@ManyToOne

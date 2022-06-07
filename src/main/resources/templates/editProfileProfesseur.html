@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{ProfesseurTemplate}">
+<head>
+<meta charset="UTF-8"/>
+<title>Editer mon profile</title>
+<style type="text/css">
+h2{
+color: blue;
+}
+label {
+	color: blue;
+}
+
+</style>
+</head>
+<body>
+
+ <div layout:fragment="content">
+  <div class="container">
+  <h2>Editer mon profile</h2>
+  <form th:action="@{/prof/editepr/{id}}" method="post">
+    <div class="form-group">
+      <label for="nomUtilisateur">nom Utilisateur:</label>
+      <input type="text" class="form-control" id="nomUtilisateur" th:value="${professeur.nomUtilisateur}"  name="nomUtilisateur">
+      <span class="red" th:errors="${professeur.nomUtilisateur}"></span>
+    </div>
+    <div class="form-group">
+      <label for="nomComplet">nom Complet:</label>
+      <input type="text" class="form-control" id="nomComplet" th:value="${professeur.nomComplet}"  name="nomComplet">
+      <span class="red" th:errors="${professeur.nomComplet}"></span>
+    </div>
+    
+    <div class="form-group">
+      <label for="orientation">secteur d'orientation:</label>
+      <input type="text" class="form-control" id="orientation"  th:value="${professeur.orientation.libelle}"  name="orientation">
+    </div>
+    <div class="form-group">
+      <label for="etablissement">etablissement:</label>
+      <input type="text" class="form-control" id="etablissement"  th:value="${professeur.etablissement.libelle}"  name="etablissement">
+    </div>
+  
+    <button type="submit" class="btn btn-primary">valider</button>
+  </form>
+</div>
+</div>
+</body>
+</html>

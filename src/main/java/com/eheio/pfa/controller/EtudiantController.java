@@ -1,11 +1,14 @@
 package com.eheio.pfa.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
 
-import com.eheio.pfa.securityy.MyUserPrincipalEtudiant;
-import com.eheio.pfa.service.CurrentUserEtudiant;
+
+
+//import com.eheio.pfa.service.CurrentUserEtudiant;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,24 +47,24 @@ public class EtudiantController {
 	private EtablissementRepository etablissementRepository;
 	@Autowired
 	private MessageRepository messageRepository;
+	/*
 	@Autowired
-	CurrentUserEtudiant currentUserEtudiant;
-	
+	private MyUserPrincipalEtudiant etudiant;
+	*/
 	//org.slf4j.Logger logger=LoggerFactory.getLogger(EtudiantController.class);
 
 	
 	       //afficher les conseillers qui ont le meme etablissement de l'etudiant connécté avec ses secteurs d'orientation
 	
 	       
-	       @GetMapping(value = "/etudiant/Conseillers")
-	       public String listConseillers(CurrentUserEtudiant currentUserEtudiant,String email,Model model) {
+	      // @GetMapping(value = "/etudiant/Conseillers")
+	       //public String listConseillers(String email,Model model) {
 		
-	       List<ProfilDataConseillerPourEtudiant>	 ProfilDataCE=
-	       conseillerRepository.profileConseillerEtudiant(email);
-	       model.addAttribute("ProfilDataCE", ProfilDataCE);	
-		   return "listConseillers";
-		
-	}
+	        // List<ProfilDataConseillerPourEtudiant>	 ProfilDataCE=
+	        // conseillerRepository.profileConseillerEtudiant(this.currentUserEtudiant.CurrentUserEt(etudiant));
+	        // model.addAttribute("ProfilDataCE", ProfilDataCE);	
+		    // return "listConseillers";
+		// }
 	
 	       
 	       //Affichage de profile
@@ -69,7 +72,7 @@ public class EtudiantController {
 		    @GetMapping(value = "/etudiant/ProfileEtudiant")
 		    public String profile(Model model,String email) {
 
-		     ProfileDataEtudiant profilData=etudiantRepository.profileEtudiant(email);
+		     ProfileDataEtudiant profilData=etudiantRepository.profileEtudiant("Etudiant11@gmail.com");
 		     model.addAttribute("profilData", profilData);
 		     return "profileEtudiant";
 		    	
@@ -85,17 +88,18 @@ public class EtudiantController {
 		    }
 		    
 		    @PostMapping(value = "/etudiant/editeProfileEt/{id}")
-		    public String editeEtudiantPost(Etudiant e, @PathVariable int id) {
+		    public String editeEtudiantPost(@Valid Etudiant e, @PathVariable int id,BindingResult result) {
 		    	
 		    	   Optional<Etudiant> ebag=etudiantRepository.findById(id);
 		    	   Etudiant etudiant= ebag.get();
 		    	   etudiant.setEmail(e.getEmail());
 		    	   etudiant.setNomComplet(e.getNomComplet());
 		    	   etudiant.setNomUtilisateur(e.getNomUtilisateur());
-		    	   /*
+		    	   
 		    	   etudiant.setEtablissement(e.getEtablissement());
 		    	   etudiant.setNiveauScolaire(e.getNiveauScolaire());
-		    	   */
+		    	   
+				   if(result.hasErrors()) return "editProfileEtudiant";		
 		    	   etudiantRepository.save(etudiant);
 		    	   return "redirect:/etudiant/ProfileEtudiant";
 		    }
@@ -111,17 +115,25 @@ public class EtudiantController {
 		    }
 		    
 		    @PostMapping(value = "/etudiant/contacter/{id}")
-		    public String contacterPost( Message message,Conseiller conseiller,@PathVariable int id) {
+		    public String contacterPost(@Valid Message message,Conseiller conseiller,@PathVariable int id,BindingResult result) {
 		    	
 		    Optional<Conseiller> c=conseillerRepository.findById(id);
-	    	message.setConseiller(conseiller);   
+	    	message.setConseiller(conseiller);
+	    	if(result.hasErrors()) return "contacter";
 		    messageRepository.save(message);
 		    return "redirect:/etudiant/Conseillers";
 		    }
 		    
  
+		    //afiicher les cours pour l'etudiant publié par le professeur (etabllissement prof=etabllissement etud)
+		    /*
+		    @GetMapping(value = "/etudiant/cours")
+		    public String cours( Model model,String email) {
+		    	
 		    
-		    
+		    return "coursEt";
+		    }
+		    */
 		     
 	
 }

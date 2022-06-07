@@ -71,6 +71,31 @@
                     <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deletee/{id}(id=${e.id_utilisateur})}">supprimer</a></td>
                     </tr>
        </table>
+       <br>
+      <h3 style="text-align: center; color: blue;">Les Listes des  Professeurs</h3>
+      <br>
+      <br>
+       <table class="table table-striped">
+                    <tr>
+                    <th>idUtilisateur</th><th>SecteurOrientation</th><th>etablissement</th><th>Nom Complet</th><th>Etat</th><th>Email</th><th>Nom Utilisateur</th><th>Action</th>
+                    </tr>
+                    <tr th:each="p:${listProf}">
+                    <td th:text="${p.id_utilisateur}"></td>
+                    <td th:text="${p.libelles}"></td> 
+                    <td th:text="${p.libellee}"></td> 
+                    <td th:text="${p.nom_complet}"></td>
+                    <td th:if="${p.isaprouv}">
+                    Approuvé
+                    </td>
+                    <!-- ELSE -->
+                    <td th:unless="${p.isaprouv}">
+                    <a th:href="@{/admin/approuvProf/{id}(id=${p.id_utilisateur})}" class="btn btn-primary">Approuver</a>                    
+                    </td>      
+                    <td th:text="${p.email}"></td>
+                    <td th:text="${p.nom_utilisateur}"></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/delete/{id}(id=${p.id_utilisateur})}">supprimer</a></td>
+                    </tr>
+      </table>
  </div>
 </div>
 </body>
