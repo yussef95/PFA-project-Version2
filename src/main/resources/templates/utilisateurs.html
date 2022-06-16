@@ -37,7 +37,7 @@
                     <th>idUtilisateur</th><th>SecteurOrientation</th><th>etablissement</th><th>Nom Complet</th><th>Etat</th><th>Email</th><th>Nom Utilisateur</th><th>Action</th>
                     </tr>
                     <tr th:each="c:${listConseiller}">
-                    <td th:text="${c.id_utilisateur}"></td>
+                    <td th:text="${c.id}"></td>
                     <td th:text="${c.libelles}"></td> 
                     <td th:text="${c.libellee}"></td> 
                     <td th:text="${c.nom_complet}"></td>
@@ -46,11 +46,11 @@
                     </td>
                     <!-- ELSE -->
                     <td th:unless="${c.isaprouv}">
-                    <a th:href="@{/admin/approuv/{id}(id=${c.id_utilisateur})}" class="btn btn-primary">Approuver</a>
+                    <a th:href="@{/admin/approuv/{id}(id=${c.id})}" class="btn btn-primary">Approuver</a>
                     </td>
                     <td th:text="${c.email}"></td>
                     <td th:text="${c.nom_utilisateur}"></td>
-                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deletec/{id}(id=${c.id_utilisateur})}">supprimer</a></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deletec/{id}(id=${c.id})}">supprimer</a></td>
                     </tr>
       </table>
       <br>
@@ -62,13 +62,13 @@
                     <th>idUtilisateur</th><th>NiveauScolaire</th><th>Etablissement</th><th>Nom Complet</th><th>Email</th><th>Nom Utilisateur</th><th>Action</th> 
                     </tr>
                     <tr th:each="e:${listEtudiant}">
-                    <td th:text="${e.id_utilisateur}"></td>
+                    <td th:text="${e.id}"></td>
                     <td th:text="${e.libellee}"></td>
                     <td th:text="${e.libellen}"></td>
                     <td th:text="${e.nom_complet}"></td>
                     <td th:text="${e.email}"></td>
                     <td th:text="${e.nom_utilisateur}"></td>
-                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deletee/{id}(id=${e.id_utilisateur})}">supprimer</a></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/deletee/{id}(id=${e.id})}">supprimer</a></td>
                     </tr>
        </table>
        <br>
@@ -80,7 +80,7 @@
                     <th>idUtilisateur</th><th>SecteurOrientation</th><th>etablissement</th><th>Nom Complet</th><th>Etat</th><th>Email</th><th>Nom Utilisateur</th><th>Action</th>
                     </tr>
                     <tr th:each="p:${listProf}">
-                    <td th:text="${p.id_utilisateur}"></td>
+                    <td th:text="${p.id}"></td>
                     <td th:text="${p.libelles}"></td> 
                     <td th:text="${p.libellee}"></td> 
                     <td th:text="${p.nom_complet}"></td>
@@ -89,11 +89,11 @@
                     </td>
                     <!-- ELSE -->
                     <td th:unless="${p.isaprouv}">
-                    <a th:href="@{/admin/approuvProf/{id}(id=${p.id_utilisateur})}" class="btn btn-primary">Approuver</a>                    
+                    <a th:href="@{/admin/approuvProf/{id}(id=${p.id})}" class="btn btn-primary">Approuver</a>                    
                     </td>      
                     <td th:text="${p.email}"></td>
                     <td th:text="${p.nom_utilisateur}"></td>
-                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/delete/{id}(id=${p.id_utilisateur})}">supprimer</a></td>
+                    <td><a onclick="return confirm('etes-vous sur?')" th:href="@{/admin/delete/{id}(id=${p.id})}">supprimer</a></td>
                     </tr>
       </table>
  </div>

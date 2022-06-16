@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.eheio.pfa.dao.ArticleRepository;
 import com.eheio.pfa.dao.ConcoursRepository;
 import com.eheio.pfa.dao.ConseillerRepository;
+import com.eheio.pfa.dao.EtablissementRepository;
 import com.eheio.pfa.dao.EvenementRepository;
 import com.eheio.pfa.dao.MessageRepository;
 import com.eheio.pfa.dao.PublicationRepository;
+import com.eheio.pfa.dao.SecteurOrientationRepository;
 import com.eheio.pfa.dto.ListDataArticle;
 import com.eheio.pfa.dto.ListDataArticleProfile;
 import com.eheio.pfa.dto.ListDataConcours;
@@ -32,9 +34,12 @@ import com.eheio.pfa.dto.ProfilData;
 import com.eheio.pfa.entities.Article;
 import com.eheio.pfa.entities.Concours;
 import com.eheio.pfa.entities.Conseiller;
+import com.eheio.pfa.entities.Etablissement;
 import com.eheio.pfa.entities.Evenement;
 import com.eheio.pfa.entities.Message;
 import com.eheio.pfa.entities.Publication;
+import com.eheio.pfa.entities.SecteurOrientation;
+
 
 @Controller
 public class ConseillerController {
@@ -52,6 +57,10 @@ public class ConseillerController {
 	private ArticleRepository articleRepository;
 	@Autowired
 	private MessageRepository messageRepository;
+	@Autowired
+	private EtablissementRepository etablissementRepository;
+	@Autowired
+	private SecteurOrientationRepository orientationRepository;
 	
 	
 	//org.slf4j.Logger logger=LoggerFactory.getLogger(ConseillerController.class);
@@ -60,12 +69,14 @@ public class ConseillerController {
 	
 	//lister tous les  publications(concours,evenements,article) et voir qui est le publicateur.
 	
+	    
 	    @GetMapping(value="/conseiller/publications")
 	    public String publication(Model model) {
 		/*
 		List<Publication> publications=publicationRepository.findAll();
 		model.addAttribute("listePublications", publications);
 		*/
+
 		List<ListDataEvenement> evenements=evenementRepository.ListDataEvenement();
 		model.addAttribute("listeEvenements", evenements);
 		
@@ -79,13 +90,13 @@ public class ConseillerController {
 	
 	//supprimer un publication
 	
-	    /*
+	    
 	    @GetMapping(value ="/conseiller/deletepc")
 	    public String deletep(int id) {
 		publicationRepository.deleteById(id);
 		return "redirect:/conseiller/monProfile";
 	}
-	    */
+	    
 	
 	
 	//supprimer un  article
@@ -120,13 +131,22 @@ public class ConseillerController {
 	return "nouveauformeEvenement";
 	}
 	@PostMapping(value="/conseiller/ajoutee")
-	public String ajoutere(@Valid Evenement e,BindingResult result) {
+	public String ajoutere(@Valid Evenement e,BindingResult result,Authentication authentication) {
 	if(result.hasErrors()) return "nouveauformeEvenement";
-	Conseiller c=conseillerRepository.findByEmail("conseiller1@gmail.com");
+	Conseiller c=conseillerRepository.findByEmail(authentication.getName());
 	e.setConseiller(c);
+	if(c.isIsaprouv()==true) {
 	publicationRepository.save(e);
 	return "redirect:/conseiller/publications";
 	}
+	else 
+	{
+	return "403";
+	}
+	
+	}
+	
+	
 	
 	//formulaire d'ajoute de concours
 	
@@ -137,10 +157,18 @@ public class ConseillerController {
 	}
 	
 	@PostMapping(value="/conseiller/ajoutec")
-	public String ajouterc(@Valid Concours c,Conseiller cn,BindingResult result) {
-	if(result.hasErrors()) return "nouveauformeConcours";	
-	publicationRepository.save(c);
-	return "redirect:/conseiller/publications";
+	public String ajouterc(@Valid Concours cn,BindingResult result,Authentication authentication) {
+	if(result.hasErrors()) return "nouveauformeConcours";
+	Conseiller c=conseillerRepository.findByEmail(authentication.getName());
+	cn.setConseiller(c);
+	if(c.isIsaprouv()==true) {
+		publicationRepository.save(cn);
+		return "redirect:/conseiller/publications";
+		}
+		else 
+		{
+		return "403";
+		}
 	}
 	
 	//formulaire d'ajoute de l'article
@@ -152,10 +180,18 @@ public class ConseillerController {
 		}
 	
 	@PostMapping(value="/conseiller/ajoutea")
-	public String ajoutera(@Valid Article a,Conseiller cn,BindingResult result) {
-	if(result.hasErrors()) return "nouveauformeArticle";		
-	publicationRepository.save(a);
-	return "redirect:/conseiller/publications";
+	public String ajoutera(@Valid Article a,BindingResult result,Authentication authentication) {
+	if(result.hasErrors()) return "nouveauformeArticle";
+	Conseiller c=conseillerRepository.findByEmail(authentication.getName());
+	a.setConseiller(c);
+	if(c.isIsaprouv()==true) {
+		publicationRepository.save(a);
+		return "redirect:/conseiller/publications";
+		}
+		else 
+		{
+		return "403";
+		}
 	}
 	
 	//editer un evenement
@@ -227,9 +263,13 @@ public class ConseillerController {
 		    }
 	
 		    //Affichage de profile et voir mes publication
-		    
+		    /*
+		        Authentication authentication    
+		        authentication.getName()
+		    */
+		        
 		    @GetMapping(value = "/conseiller/monProfile")
-		    public String profile(String email,Model model,Authentication authentication) {
+		    public String profile(Model model,Authentication authentication) {
 		    ProfilData profilData=conseillerRepository.profileConseiller(authentication.getName());
 		    //logger.info(profilData.getEmail());
 		    model.addAttribute("profilData", profilData);
@@ -255,6 +295,10 @@ public class ConseillerController {
 		    @GetMapping(value = "/conseiller/editeProfilec/{id}")
 		    public String editeConseiller(Model model,@PathVariable int id) {
 		    Optional<Conseiller> c=conseillerRepository.findById(id);
+	    	List<Etablissement> etablissements = etablissementRepository.findAll();
+			List<SecteurOrientation> secteurOrientations=orientationRepository.findAll();
+			model.addAttribute("etablissement",etablissements);
+			model.addAttribute("secteurOrientations",secteurOrientations);
 		    model.addAttribute("conseiller", c.get());
 		    return "editProfileConseiller";
 		    }
@@ -265,7 +309,7 @@ public class ConseillerController {
 		           Optional<Conseiller> cbag=conseillerRepository.findById(id);
 		     	   Conseiller conseiller=cbag.get();
 		    	   conseiller.setNomComplet(c.getNomComplet());
-		    	   conseiller.setnomUtilisateur(c.getnomUtilisateur());
+		    	   conseiller.setNomUtilisateur(c.getNomUtilisateur());
 		    	   conseiller.setOrientation(c.getOrientation());
 		    	   conseiller.setEtablissement(c.getEtablissement());
 				   if(result.hasErrors()) return "editProfileConseiller";		
@@ -275,8 +319,8 @@ public class ConseillerController {
 		    
 		    //lister les messages pour le conseiller
 		    @GetMapping(value = "/conseiller/messagerie")
-		    public String messagerie (Model model,String email) {
-		    List<Message> messages=messageRepository.messages(email);
+		    public String messagerie (Model model,Authentication authentication) {
+		    List<Message> messages=messageRepository.messages(authentication.getName());
 		    model.addAttribute("message",messages );
 		    return "messagerie";
 		    }

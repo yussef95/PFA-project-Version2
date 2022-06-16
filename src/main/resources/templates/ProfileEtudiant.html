@@ -19,13 +19,13 @@
                     </tr>
                     
                     <tr th:each="pd:${profilData}">
-                    <td th:text="${pd.id_utilisateur}"></td>
+                    <td th:text="${pd.id}"></td>
                     <td th:text="${pd.libellen}"></td> 
                     <td th:text="${pd.libellee}"></td>
                     <td th:text="${pd.nom_complet}"></td> 
                     <td th:text="${pd.email}"></td>
                     <td th:text="${pd.nom_utilisateur}"></td>
-                    <td><a th:href="@{/etudiant/editeProfileEt/{id}(id=${pd.id_utilisateur})}">Editer</a></td> 
+                    <td><a th:href="@{/etudiant/editeProfileEt/{id}(id=${pd.id})}">Editer</a></td> 
 
                     </tr>
                     

@@ -10,51 +10,32 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
 
-
-	@Autowired
-	UtilisateurRepository utilisateurRepository;
-	@Autowired
-	EvenementRepository evenementRepository;
-	@Autowired
-	ArticleRepository articleRepository;
-	@Autowired
-	ConcoursRepository concoursRepository;
-	@Autowired
-	NiveauScolaireRepository niveauScolaireRepository;
-	@Autowired
-	EtablissementRepository etablissementRepository;
-	@Autowired
-	SecteurOrientationRepository secteurOrientationRepository;
+    
+   
 	
-	//page des evenements
-	@GetMapping(value="/evenement")
-	public String evenement(Model model) {
-		List<Evenement>evenements =evenementRepository.findAll();
-		model.addAttribute("listeEvenement", evenements);
-		return "evenement";
-		}
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
+	@Autowired
+	private EvenementRepository evenementRepository;
+	@Autowired
+	private ArticleRepository articleRepository;
+	@Autowired
+	private ConcoursRepository concoursRepository;
+	@Autowired
+	private NiveauScolaireRepository niveauScolaireRepository;
+	@Autowired
+	private EtablissementRepository etablissementRepository;
+	@Autowired
+	private SecteurOrientationRepository secteurOrientationRepository;
+	@Autowired
+	private RoleRepository roleRepository;
 	
-	//page des article
-		@GetMapping(value="/article")
-		public String article(Model model) {
-			List<Article>articles =articleRepository.findAll();
-			model.addAttribute("listeArticle", articles);
-			return "article";
-			}
-		
-		//page des concours
-		@GetMapping(value="/concoursh")
-		public String concours(Model model) {
-			List<Concours>concours =concoursRepository.findAll();
-			model.addAttribute("listeConcours", concours);
-			return "concours";
-			}
+	
 		
 	//Page d'acceuill
 	
@@ -85,8 +66,14 @@ public class HomeController {
 	public String contact() {
 		return "contact";
 	}
+	    //page d'inscription
 	
-	//inscription pour les etudeiants
+		@GetMapping(value="/inscreption")
+		public String inscreption() {
+			return "inscription";
+		}
+	
+	//inscription pour les etudiants
 	@GetMapping("/inscreptionEtudiantForm")
 	public String FormInscription(Model model) {
 		List<NiveauScolaire> niveauScolaires = niveauScolaireRepository.findAll();
@@ -100,7 +87,9 @@ public class HomeController {
 	public String inscriptionEtudiant(Etudiant etudiant, Model model) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(etudiant.getPassword());
+		Role role=roleRepository.findByName("ETUDIANT");
 		etudiant.setPassword(encodedPassword);
+		etudiant.setRole(role);
 		utilisateurRepository.save(etudiant);
 		return "inscription_success";
 		
@@ -119,10 +108,33 @@ public class HomeController {
 	public String inscriptionConseiller(Conseiller conseiller) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(conseiller.getPassword());
+		Role role=roleRepository.findByName("CONSEILLER");
 		conseiller.setPassword(encodedPassword);
+		conseiller.setRole(role);
 		utilisateurRepository.save(conseiller);
-		return "inscription_success_conseiller";
+		return "inscription_success";
 
 	}
+	//inscription pour les professeurs
+		@GetMapping("/inscreptionProfesseurForm")
+		public String FormInscriptionProfesseur(Model model) {
+			List<Etablissement> etablissements = etablissementRepository.findAll();
+			List<SecteurOrientation> secteurOrientations=secteurOrientationRepository.findAll();
+			model.addAttribute("secteurOrientations",secteurOrientations);
+			model.addAttribute("etablissement",etablissements);
+			model.addAttribute("professeur", new Professeur());
+			return "inscription_form_professeur";
+		}
+		@PostMapping(value="/inscriptionProfesseurSubmit")
+		public String inscriptionProfesseur( Professeur professeur) {
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String encodedPassword = passwordEncoder.encode(professeur.getPassword());
+			Role role=roleRepository.findByName("PROFESSEUR");
+			professeur.setPassword(encodedPassword);
+			professeur.setRole(role);
+			utilisateurRepository.save(professeur);
+			return "inscription_success";
+
+		}
 		
 }

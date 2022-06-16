@@ -2,7 +2,7 @@ package com.eheio.pfa.dto;
 
 public interface ListDataAdmin {
 
-	int    getId_utilisateur();
+	int    getId();
 	String getNom_complet();
 	String getEmail();
 	String getNom_utilisateur();

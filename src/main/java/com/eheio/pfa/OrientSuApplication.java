@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.eheio.pfa.dao.AdminRepository;
 import com.eheio.pfa.dao.ArticleRepository;
 import com.eheio.pfa.dao.ConcoursRepository;
@@ -28,6 +26,7 @@ import com.eheio.pfa.entities.Etablissement;
 import com.eheio.pfa.entities.Etudiant;
 import com.eheio.pfa.entities.Evenement;
 import com.eheio.pfa.entities.NiveauScolaire;
+import com.eheio.pfa.entities.Professeur;
 import com.eheio.pfa.entities.Publication;
 import com.eheio.pfa.entities.SecteurOrientation;
 import com.eheio.pfa.entities.Utilisateur;
@@ -38,9 +37,10 @@ import com.eheio.pfa.entities.Utilisateur;
 public class OrientSuApplication  implements CommandLineRunner {
 
 
+	 /*
 	 @Autowired
 	 private PasswordEncoder passwordEncoder;
-
+     */
 	 @Autowired
 	 private UtilisateurRepository utilisateurRepository;
 	 @Autowired
@@ -68,10 +68,11 @@ public class OrientSuApplication  implements CommandLineRunner {
 		SpringApplication.run(OrientSuApplication.class, args);
 	}
 
+	
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-
+        
 		/*
 		Etablissement et1=etablissementRepository.save(new Etablissement("ziri"));
 		Etablissement et2=etablissementRepository.save(new Etablissement("abdelmoumen"));
@@ -83,18 +84,22 @@ public class OrientSuApplication  implements CommandLineRunner {
         SecteurOrientation s2=orientationRepository.save(new SecteurOrientation("lettre"));
         SecteurOrientation s3=orientationRepository.save(new SecteurOrientation("technique"));
         SecteurOrientation s4=orientationRepository.save(new SecteurOrientation("economique"));
-        Utilisateur c1=utilisateurRepository.save(new Conseiller("conseiller1@gmail.com",passwordEncoder.encode("1234conseiller"),"conseiller1",false,"cn1",s1,et1));
-        Utilisateur c2=utilisateurRepository.save(new Conseiller("conseiller2@gmail.com",passwordEncoder.encode("1234conseiller"),"conseiller2",false,"cn2",s2,et2));
-        Utilisateur c3=utilisateurRepository.save(new Conseiller("conseiller3@gmail.com",passwordEncoder.encode("1234conseiller"),"conseiller3",false,"cn3",s3,et3));
-        Utilisateur e1=utilisateurRepository.save(new Etudiant("Etudiant1@gmail.com",passwordEncoder.encode("1234"),"Etudiant1","mhada med", college1,et1));
-        Utilisateur e2=utilisateurRepository.save(new Etudiant("Etudiant2@gmail.com",passwordEncoder.encode("1234"),"Etudiant2","oufkir yussef", college2,et2));
-		Utilisateur e3=utilisateurRepository.save(new Etudiant("Etudiant3@gmail.com",passwordEncoder.encode("1234"),"Etudiant3","salhi yassen", college3,et3));
-		Admin a= adminRepository.save(new Admin("admin2@gmail.com",passwordEncoder.encode("admin123"),"admin"));
+        Utilisateur c1=utilisateurRepository.save(new Conseiller(1, "conseiller1@gmail.com", passwordEncoder.encode("123"), "cons1", "salhi yassen", false, s1, et1));
+        Utilisateur c2=utilisateurRepository.save(new Conseiller(2, "conseiller2@gmail.com", passwordEncoder.encode("123"), "cons2", "oufkir youssef", false, s2, et2));
+        Utilisateur c3=utilisateurRepository.save(new Conseiller(3, "conseiller3@gmail.com", passwordEncoder.encode("123"), "cons3", "mhada med", false, s3, et3));
+        Utilisateur e1=utilisateurRepository.save(new Etudiant(4, "etudiant1@gmail.com", passwordEncoder.encode("123"), "etud1", "tahri mastafa", college1, et1));
+        Utilisateur e2=utilisateurRepository.save(new Etudiant(5, "etudiant1@gmail.com", passwordEncoder.encode("123"), "etud1", "tahri mastafa", college1, et2));
+        Utilisateur e3=utilisateurRepository.save(new Etudiant(6, "etudiant1@gmail.com", passwordEncoder.encode("123"), "etud1", "tahri mastafa", college1, et3));
+        Utilisateur a=utilisateurRepository.save(new Admin(7, "etudiant1@gmail.com", passwordEncoder.encode("123"), "admin", "kasmi ayoub"));
+        Utilisateur pr=utilisateurRepository.save(new Professeur(0, null, null, null, null, false, et3, s4))
+        Utilisateur p1=utilisateurRepository.save(new Professeur(8, "professeur1@gmail.com", "123", "prof1", "abad med", false, null,null ));
 
         */
+
 
 
 
 	}
 
 }
+

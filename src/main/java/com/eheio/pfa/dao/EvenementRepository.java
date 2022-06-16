@@ -16,15 +16,17 @@ public interface EvenementRepository extends JpaRepository<Evenement, Integer> {
 	
 	//query pour lister tous les evenements  avec le nom complet de publicateur,dans espace admin
     
-    @Query(value="  select ev.id_publication,ev.titre,ev.description,c.nom_complet,c.id_utilisateur from conseiller c "
-    		+ "     inner join publication p on p.id_conseiller=c.id_utilisateur "
-    		+ "     inner join evenement ev on ev.id_publication=p.id ",nativeQuery = true)
+    @Query(value="           select ev.id_publication,ev.titre,ev.description,u.nom_complet from utilisateur u  "
+			+ "              INNER JOIN conseiller con on u.id=con.id_utilisateur"
+			+ "    		     inner join publication p on p.id_conseiller=con.id_utilisateur "
+			+ "    		     inner join evenement ev on ev.id_publication=p.id ",nativeQuery = true)
 	        public List<ListDataEvenement> ListDataEvenement();
    
     //query pour lister les evenement de le publicateur courant dans espace conseiller.
-    @Query(value="     select ev.id_publication,ev.titre,ev.description,c.id_utilisateur from conseiller c "
-    		+    "     inner join publication p on p.id_conseiller=c.id_utilisateur "
-    		+    "     inner join evenement ev on ev.id_publication=p.id where c.email=?1 ",nativeQuery = true)
+    @Query(value="          select ev.id_publication,ev.titre,ev.description,u.id FROM utilisateur u "
+    		+ "             inner join  Conseiller c on u.id=c.id_utilisateur"
+    		+ "    		    inner join publication p on p.id_conseiller=c.id_utilisateur "
+    		+ "    		    inner join evenement ev on ev.id_publication=p.id where u.email=?1",nativeQuery = true)
 	        public List<ListDataEvenementProfile> listDataEvenementProfiles(String email);
     
    

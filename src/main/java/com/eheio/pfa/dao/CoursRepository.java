@@ -16,28 +16,23 @@ public interface CoursRepository extends JpaRepository<Cours, Integer>
 
 {
 
+	
 	//query pour lister les cours de le publicateur courant dans espace prof.
-    @Query(value="     select cr.id,cr.titre,cr.description,p.id_utilisateur from professeur p "
-    		+    "     inner join cours cr on cr.id_professeur=p.id_utilisateur where p.email=?1 ",nativeQuery = true)
+    @Query(value="select c.id,c.titre,c.description  from professeur p inner join utilisateur u on u.id=p.id_utilisateur inner join cours c on c.id_professeur=u.id where u.email=?1",nativeQuery = true)
     
-	        public List<ListDataCours> listDataCours(String email);
+	public List<ListDataCoursAll> listDataCoursAlls(String email);
     
-   //query pour lister tous les cours  avec le nom complet de publicateur,
-     
-    @Query(value="  select cr.id,cr.titre,cr.description,p.nom_complet,p.id_utilisateur from professeur p "
-    		+ "     inner join cours cr on cr.id_professeur=p.id_utilisateur",nativeQuery = true)
-	        public List<ListDataCoursAll> dataCoursAlls();
+   
     
-    //query pour afficher les conseillers qui ont le meme etablissement de l'etudiant connécté
-    //avec ses secteurs d'orientation et etablissement dans espace etudiant
+    
     
     //afiicher les cours pour l'etudiant publié par le professeur (etabllissement prof=etabllissement etud)
     
-    /*
-    @Query(value="select cr.id,cr.titre,cr.description from cours cr"
-    		+ " inner join etablissement e on cr.id_etablissement=e.id "
-    		+ "  where"
-    		+ "  cr.id_etablissement=(select et.id_etablissement from etudiant et where et.email=?1 )",nativeQuery = true)
-    */
+    
+    @Query(value="            Select c.titre,c.description,nom_complet from utilisateur u inner join professeur p on u.id=p.id_utilisateur Inner join\r\n"
+    		+ "    		      cours c on c.id_professeur=u.id  where  p.id_etablissement=\r\n"
+    		+ "    		      (select et.id_etablissement from etudiant et  INNER JOIN utilisateur u on u.id=et.id_utilisateur where u.email=?1)",nativeQuery = true)
+    public List<ListDataCours> listDataCours(String email);
+    
 	
 }

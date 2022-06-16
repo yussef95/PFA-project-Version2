@@ -10,24 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class SecurityController {
 
-	       //page de login admin
-			@GetMapping(value="/admin/login")
+	       //page de login 
+			@GetMapping(value="/user/login")
 			public String login() {
 				return "login";
 			}
 
-			    
-			//page de login etudiant
-			@GetMapping(value="/etudiant/loginEtudiant")
-				public String loginEtudiant() {
-					return "loginEtudiant";
-				}
-
-	        //page de login etudiant
-	        @GetMapping(value="/conseiller/loginConseiller")
-	        public String loginConseiller() {
-		return "loginConseiller";
-	}
 				
 			//forbidden
 			@GetMapping(value="/403")

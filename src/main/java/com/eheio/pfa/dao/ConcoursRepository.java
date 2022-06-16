@@ -13,14 +13,16 @@ import com.eheio.pfa.entities.Conseiller;
 
 public interface ConcoursRepository extends JpaRepository<Concours, Integer> {
 	
-	@Query(value="  select cc.id_publication,cc.titre,cc.description,c.nom_complet,c.id_utilisateur from conseiller c "
-    		+ "     inner join publication p on p.id_conseiller=c.id_utilisateur "
-    		+ "     inner join concours cc on cc.id_publication=p.id ",nativeQuery = true)
+	@Query(value="           select cc.id_publication,cc.titre,cc.description,u.nom_complet from utilisateur u  "
+			+ "              INNER JOIN conseiller con on u.id=con.id_utilisateur"
+			+ "    		     inner join publication p on p.id_conseiller=con.id_utilisateur "
+			+ "    		     inner join concours cc on cc.id_publication=p.id ",nativeQuery = true)
 	        public List<ListDataConcours> listDataConcours();
 	
 	 //query pour lister les concours de le publicateur courant dans espace conseiller.
-    @Query(value="     select cn.id_publication,cn.titre,cn.description,c.id_utilisateur from conseiller c "
-    		+    "     inner join publication p on p.id_conseiller=c.id_utilisateur "
-    		+    "     inner join concours cn on cn.id_publication=p.id where c.email=?1 ",nativeQuery = true)
+    @Query(value="          select cc.id_publication,cc.titre,cc.description,u.id FROM utilisateur u "
+    		+ "             inner join  Conseiller c on u.id=c.id_utilisateur"
+    		+ "    		    inner join publication p on p.id_conseiller=c.id_utilisateur "
+    		+ "    		    inner join concours cc on cc.id_publication=p.id where u.email=?1",nativeQuery = true)
 	        public List<ListaDataConcoursProfile> listaDataConcoursProfiles (String email);
 }

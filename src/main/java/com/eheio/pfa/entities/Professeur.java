@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
@@ -18,17 +19,10 @@ import javax.validation.constraints.NotNull;
 @PrimaryKeyJoinColumn( name = "idUtilisateur" )
 
 public class Professeur extends Utilisateur{
-	@NotNull
-	@Email
-	private String email;
-	@NotNull
-	private String password;
-	@NotNull
-	public String nomUtilisateur;
+	
 	@NotNull
 	private boolean isaprouv;
-	@NotNull
-	private String nomComplet;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "id_etablissement")
@@ -39,9 +33,7 @@ public class Professeur extends Utilisateur{
 	private SecteurOrientation orientation;
 
 	@OneToMany(mappedBy = "professeur",fetch = FetchType.LAZY )
-
 	private Collection<Cours> cours;
-	
 	
 
 	public Professeur() {
@@ -49,42 +41,18 @@ public class Professeur extends Utilisateur{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Professeur(String email, String password, String nomUtilisateur, boolean isaprouv, String nomComplet,
-			Etablissement etablissement,SecteurOrientation orientation) {
-		super();
-		this.email = email;
-		this.password = password;
-		this.nomUtilisateur = nomUtilisateur;
+	public Professeur(int id, @Email @NotEmpty String email, @NotEmpty String password, @NotEmpty String nomUtilisateur,
+			         @NotEmpty String nomComplet,@NotEmpty boolean isaprouv,Role role, Etablissement etablissement, SecteurOrientation orientation) {
+		super(id, email, password, nomUtilisateur, nomComplet,role);
+		// TODO Auto-generated constructor stub
 		this.isaprouv = isaprouv;
-		this.nomComplet = nomComplet;
 		this.etablissement = etablissement;
 		this.orientation = orientation;
-
 	}
+	
+	
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getNomUtilisateur() {
-		return nomUtilisateur;
-	}
-
-	public void setNomUtilisateur(String nomUtilisateur) {
-		this.nomUtilisateur = nomUtilisateur;
-	}
+	
 
 	public boolean isIsaprouv() {
 		return isaprouv;
@@ -94,13 +62,7 @@ public class Professeur extends Utilisateur{
 		this.isaprouv = isaprouv;
 	}
 
-	public String getNomComplet() {
-		return nomComplet;
-	}
 
-	public void setNomComplet(String nomComplet) {
-		this.nomComplet = nomComplet;
-	}
 
 	public Etablissement getEtablissement() {
 		return etablissement;

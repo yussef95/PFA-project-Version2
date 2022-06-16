@@ -30,6 +30,11 @@ label {
       <label for="nomUtilisateur">nom Utilisateur:</label>
       <input type="text" class="form-control" id="nomUtilisateur" th:value="${admin.nomUtilisateur}"  name="nomUtilisateur">
     </div>
+    <div class="form-group">
+      <label for="nomComplet">nom Complet:</label>
+      <input type="text" class="form-control" id="nomComplet" th:value="${admin.nomComplet}"  name="nomComplet">
+      <span class="red" th:errors="${admin.nomComplet}"></span>
+    </div>
     <button type="submit" class="btn btn-primary">valider</button>
   </form>
 </div>

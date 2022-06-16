@@ -17,21 +17,21 @@
                     <tr>
                     <th>idUtilisateur</th><th>SecteurOrientation</th><th>etablissement</th><th>Nom Complet</th><th>Email</th><th>Nom Utilisateur</th><th>Action</th>
                     </tr>
-                    <tr th:each="pd:${profilDataProf}">
-                    <td th:text="${pd.id_utilisateur}"></td>
-                    <td th:text="${pd.libelles}"></td> 
-                    <td th:text="${pd.libellee}"></td>
-                    <td th:text="${pd.nom_complet}"></td> 
-                    <td th:text="${pd.email}"></td>
-                    <td th:text="${pd.nom_utilisateur}"></td>
-                    <td><a th:href="@{/prof/editepr/{id}(id=${pd.id_utilisateur})}">Editer</a></td> 
+                    <tr th:each="p:${profilDataProf}">
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.libelles}"></td> 
+                    <td th:text="${p.libellee}"></td>
+                    <td th:text="${p.nom_complet}"></td> 
+                    <td th:text="${p.email}"></td>
+                    <td th:text="${p.nom_utilisateur}"></td>
+                    <td><a th:href="@{/prof/editepr/{id}(id=${p.id})}">Editer</a></td> 
                     </tr>
                     
       </table>
       <br>
       <br>
      
-     
+      
      <h3 style="text-align: center; color: blue;">les Listes des Cours</h3>
      <br>
      <table class="table table-striped">

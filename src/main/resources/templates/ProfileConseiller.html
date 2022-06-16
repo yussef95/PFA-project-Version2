@@ -18,13 +18,13 @@
                     <th>idUtilisateur</th><th>SecteurOrientation</th><th>etablissement</th><th>Nom Complet</th><th>Email</th><th>Nom Utilisateur</th><th>Action</th>
                     </tr>
                     <tr th:each="pd:${profilData}">
-                    <td th:text="${pd.id_utilisateur}"></td>
+                    <td th:text="${pd.id}"></td>
                     <td th:text="${pd.libelles}"></td> 
                     <td th:text="${pd.libellee}"></td>
                     <td th:text="${pd.nom_complet}"></td> 
                     <td th:text="${pd.email}"></td>
                     <td th:text="${pd.nom_utilisateur}"></td>
-                    <td><a th:href="@{/conseiller/editeProfilec/{id}(id=${pd.id_utilisateur})}">Editer</a></td> 
+                    <td><a th:href="@{/conseiller/editeProfilec/{id}(id=${pd.id})}">Editer</a></td> 
                     </tr>
                     
       </table>

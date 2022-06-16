@@ -4,6 +4,7 @@ package com.eheio.pfa.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
@@ -14,9 +15,9 @@ import javax.validation.constraints.NotNull;
 
 public class Article extends Publication{
 	
-	@NotNull
+	@NotEmpty
  	private String titre;
-	@NotNull
+	@NotEmpty
 	@Column(columnDefinition = "TEXT")
 	private String description;
 

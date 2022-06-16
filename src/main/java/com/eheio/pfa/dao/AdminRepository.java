@@ -10,8 +10,7 @@ import org.springframework.data.repository.query.Param;
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
 
-  @Query("SELECT a FROM Admin a WHERE a.nomUtilisateur = :nomUtilisateur")
-    Admin findByNomUtilisateur(@Param("nomUtilisateur")String nomUtilisateur);
+  
 	
 
 }

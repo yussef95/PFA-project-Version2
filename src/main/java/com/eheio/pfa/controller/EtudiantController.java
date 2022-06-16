@@ -11,6 +11,7 @@ import javax.validation.Valid;
 //import com.eheio.pfa.service.CurrentUserEtudiant;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,10 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.eheio.pfa.dao.ConseillerRepository;
+import com.eheio.pfa.dao.CoursRepository;
 import com.eheio.pfa.dao.EtablissementRepository;
 import com.eheio.pfa.dao.EtudiantRepository;
 import com.eheio.pfa.dao.MessageRepository;
+import com.eheio.pfa.dao.NiveauScolaireRepository;
 import com.eheio.pfa.dao.SecteurOrientationRepository;
+import com.eheio.pfa.dto.ListDataCours;
 import com.eheio.pfa.dto.ProfilData;
 import com.eheio.pfa.dto.ProfilDataConseillerPourEtudiant;
 import com.eheio.pfa.dto.ProfileDataEtudiant;
@@ -30,6 +34,7 @@ import com.eheio.pfa.entities.Conseiller;
 import com.eheio.pfa.entities.Etablissement;
 import com.eheio.pfa.entities.Etudiant;
 import com.eheio.pfa.entities.Message;
+import com.eheio.pfa.entities.NiveauScolaire;
 import com.eheio.pfa.entities.SecteurOrientation;
 
 import groovyjarjarantlr4.v4.parse.GrammarTreeVisitor.mode_return;
@@ -46,33 +51,34 @@ public class EtudiantController {
 	@Autowired
 	private EtablissementRepository etablissementRepository;
 	@Autowired
-	private MessageRepository messageRepository;
-	/*
+	private NiveauScolaireRepository niveauScolaireRepository;
 	@Autowired
-	private MyUserPrincipalEtudiant etudiant;
-	*/
+	private MessageRepository messageRepository;
+	@Autowired
+	private CoursRepository coursRepository;
+	
 	//org.slf4j.Logger logger=LoggerFactory.getLogger(EtudiantController.class);
 
 	
 	       //afficher les conseillers qui ont le meme etablissement de l'etudiant connécté avec ses secteurs d'orientation
 	
 	       
-	      // @GetMapping(value = "/etudiant/Conseillers")
-	       //public String listConseillers(String email,Model model) {
+	       @GetMapping(value = "/etudiant/Conseillers")
+	       public String listConseillers(Model model,Authentication authentication) {
 		
-	        // List<ProfilDataConseillerPourEtudiant>	 ProfilDataCE=
-	        // conseillerRepository.profileConseillerEtudiant(this.currentUserEtudiant.CurrentUserEt(etudiant));
-	        // model.addAttribute("ProfilDataCE", ProfilDataCE);	
-		    // return "listConseillers";
-		// }
+	         List<ProfilDataConseillerPourEtudiant>	 ProfilDataCE=
+	         conseillerRepository.profileConseillerEtudiant(authentication.getName());
+	         model.addAttribute("ProfilDataCE", ProfilDataCE);	
+		     return "listConseillers";
+		 }
 	
 	       
 	       //Affichage de profile
 		    
 		    @GetMapping(value = "/etudiant/ProfileEtudiant")
-		    public String profile(Model model,String email) {
+		    public String profile(Model model,Authentication authentication) {
 
-		     ProfileDataEtudiant profilData=etudiantRepository.profileEtudiant("Etudiant11@gmail.com");
+		     ProfileDataEtudiant profilData=etudiantRepository.profileEtudiant(authentication.getName());
 		     model.addAttribute("profilData", profilData);
 		     return "profileEtudiant";
 		    	
@@ -83,8 +89,13 @@ public class EtudiantController {
 		    @GetMapping(value = "/etudiant/editeProfileEt/{id}")
 		    public String editeEtudiant(Model model,@PathVariable int id) {
 		    	Optional<Etudiant> e=etudiantRepository.findById(id);
+		    	List<Etablissement> etablissements = etablissementRepository.findAll();
+				List<NiveauScolaire> niveauScolaires = niveauScolaireRepository.findAll();
+				model.addAttribute("niveau",niveauScolaires);
+				model.addAttribute("etablissement",etablissements);
 		    	model.addAttribute("etudiant", e.get());
 		    	return "editProfileEtudiant";
+		    	
 		    }
 		    
 		    @PostMapping(value = "/etudiant/editeProfileEt/{id}")
@@ -126,14 +137,16 @@ public class EtudiantController {
 		    
  
 		    //afiicher les cours pour l'etudiant publié par le professeur (etabllissement prof=etabllissement etud)
-		    /*
-		    @GetMapping(value = "/etudiant/cours")
-		    public String cours( Model model,String email) {
-		    	
 		    
-		    return "coursEt";
+		    @GetMapping(value = "/etudiant/cours")
+		    public String cours( Model model,Authentication authentication) {
+		    	
+		    	List<ListDataCours> listDataCours=coursRepository.listDataCours(authentication.getName());
+		    	model.addAttribute("cours", listDataCours);
+		    
+		        return "coursEt";
 		    }
-		    */
+		    
 		     
 	
 }

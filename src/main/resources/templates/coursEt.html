@@ -17,13 +17,12 @@
      
       <table class="table table-striped">
                     <tr>
-                    <th>id</th><th>titre</th><th>description</th><th>publié par</th>
+                    <th>titre</th><th>description</th><th>publié par</th>
                     </tr>
-                    <tr th:each="c:${}">
-                    <td th:text="${c.}"></td>    
-                    <td th:text="${c.}"></td>
-                    <td th:text="${c.}"></td>
-                    <td th:text="${c.}"></td> 
+                    <tr th:each="c:${cours}">
+                    <td th:text="${c.titre}"></td>
+                    <td th:text="${c.description}"></td>
+                    <td th:text="${c.nom_complet}"></td> 
                     </tr>
       </table>
 </div>      

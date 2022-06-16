@@ -6,7 +6,7 @@
 <meta charset="UTF-8"/>
 <title>Editer mon profile</title>
 <style type="text/css">
-h2{
+h2,h6{
 color: blue;
 }
 label {
@@ -20,7 +20,7 @@ label {
  <div layout:fragment="content">
   <div class="container">
   <h2>Editer mon profile</h2>
-  <form th:action="@{/prof/editepr/{id}}" method="post">
+  <form th:action="@{/prof/editepr/{id}(id=${professeur.id})}" method="post">
     <div class="form-group">
       <label for="nomUtilisateur">nom Utilisateur:</label>
       <input type="text" class="form-control" id="nomUtilisateur" th:value="${professeur.nomUtilisateur}"  name="nomUtilisateur">
@@ -32,14 +32,18 @@ label {
       <span class="red" th:errors="${professeur.nomComplet}"></span>
     </div>
     
-    <div class="form-group">
-      <label for="orientation">secteur d'orientation:</label>
-      <input type="text" class="form-control" id="orientation"  th:value="${professeur.orientation.libelle}"  name="orientation">
-    </div>
-    <div class="form-group">
-      <label for="etablissement">etablissement:</label>
-      <input type="text" class="form-control" id="etablissement"  th:value="${professeur.etablissement.libelle}"  name="etablissement">
-    </div>
+   <h6>Etablissement</h6>
+                            <select th:field="*{professeur.etablissement}">
+                                <option th:each="etablissement: ${etablissement}" th:value="${etablissement.id}" th:text="${etablissement.libelle}" />
+                            </select>
+                            <br>
+                            <br>
+                            <h6>Secteur d'Orientation</h6>
+                            <select th:field="*{professeur.orientation}">
+                                <option th:each="secteur: ${secteurOrientations}" th:value="${secteur.id}" th:text="${secteur.libelle}" />
+                            </select>
+                            <br>
+                            <br>
   
     <button type="submit" class="btn btn-primary">valider</button>
   </form>

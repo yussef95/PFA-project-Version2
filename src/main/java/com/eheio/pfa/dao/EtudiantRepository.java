@@ -12,24 +12,30 @@ import com.eheio.pfa.dto.ProfileDataEtudiant;
 import com.eheio.pfa.entities.Admin;
 import com.eheio.pfa.entities.Conseiller;
 import com.eheio.pfa.entities.Etudiant;
+import com.eheio.pfa.entities.Utilisateur;
 
 public interface EtudiantRepository extends JpaRepository<Etudiant, Integer> {
 	
 	//query pour edit et afficher de le profile avec mon etablissements et niveaux scolaire.
-	 @Query(value="select et.id_utilisateur,et.nom_complet,et.email,et.nom_utilisateur,n.libelle libellen,e.libelle libellee from etudiant et"
-				+ " inner join etablissement e on et.id_niveau_scolaire=e.id"
-				+ " inner join niveau_scolaire n on et.id_etablissement=n.id where et.email=?1",nativeQuery = true)
+	 @Query(value="         select u.id,u.nom_complet,u.email,u.nom_utilisateur,n.libelle libellen,et.libelle libellee"
+	 		+ "	 			from utilisateur u inner join etudiant etud on u.id=etud.id_utilisateur"
+	 		+ "	 		    inner join etablissement et on  et.id = etud.id_etablissement"
+	 		+ "             Inner join  niveau_scolaire n On"
+	 		+ "	 	        n.id=etud.id_niveau_scolaire WHERE email=?1",nativeQuery = true)
 		        public ProfileDataEtudiant profileEtudiant(String email);
 	
 	 //query pour lister tous les utilisateur(etudiant) avec ses etablissements et niveau pour etudiant,dans espace admin
 	 
-	 @Query(value="select et.id_utilisateur,et.nom_complet,et.email,et.nom_utilisateur,n.libelle libellen,e.libelle libellee from etudiant et"
-     		+ " inner join etablissement e on et.id_etablissement=e.id "
-     		+ " inner join niveau_scolaire n on et.id_niveau_scolaire=n.id",nativeQuery = true)
+	 @Query(value=" select u.id,u.nom_complet,u.email,u.nom_utilisateur,n.libelle libellen,et.libelle libellee"
+	 		+     "	from utilisateur u inner join etudiant etud on u.id=etud.id_utilisateur"
+	 		+     "	inner join etablissement et on  et.id = etud.id_etablissement Inner join  niveau_scolaire n On"
+	 		+     " n.id=etud.id_niveau_scolaire",nativeQuery = true)
 	 public List<ListDataEtudiant> listEtudiant();
+	 
+		Etudiant findByEmail(/*@Param("email")*/ String email);
 
 
-	@Query("SELECT e FROM Etudiant e WHERE e.email = :email")
-	Etudiant findByEmail(@Param("email") String email);
+
+	
 	 
 }

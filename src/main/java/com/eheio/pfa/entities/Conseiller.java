@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -15,16 +16,8 @@ import javax.validation.constraints.NotNull;
 
 public class Conseiller extends Utilisateur {
 	
-	@Email
-	@NotNull
-	private String email;
-	@NotNull
-	private String password;
-	@NotNull
-	public String nomUtilisateur;
 	private boolean isaprouv;
-	@NotNull
-	private String nomComplet;
+
 	
 	@OneToMany(mappedBy = "conseiller",fetch = FetchType.LAZY )
 	private Collection<Publication>publications;
@@ -41,27 +34,21 @@ public class Conseiller extends Utilisateur {
 	@OneToMany(mappedBy = "conseiller",fetch = FetchType.LAZY )
 	private Collection<Message> messages;
 	
-	
-
-	
-
 	public Conseiller() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Conseiller(String email, String password, String nomUtilisateur,boolean isaprouv,String nomComplet,SecteurOrientation orientation,Etablissement etablissement) {
-		// TODO Auto-generated constructor stub
-		this.email = email;
-		this.password = password;
-		this.nomUtilisateur = nomUtilisateur;
+	   public Conseiller(int id, @Email @NotEmpty String email, @NotEmpty String password, @NotEmpty String nomUtilisateur,
+			@NotEmpty String nomComplet,boolean isaprouv,Role role, SecteurOrientation orientation, Etablissement etablissement) {
+		super(id, email, password, nomUtilisateur, nomComplet,role);
 		this.isaprouv = isaprouv;
-		this.nomComplet = nomComplet;
 		this.orientation = orientation;
 		this.etablissement = etablissement;
-
-
+		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	public boolean isIsaprouv() {
 		return isaprouv;
@@ -77,38 +64,6 @@ public class Conseiller extends Utilisateur {
 
 	public void setPublications(Collection<Publication> publications) {
 		this.publications = publications;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getnomUtilisateur() {
-		return nomUtilisateur;
-	}
-
-	public void setnomUtilisateur(String nomUtilisateur) {
-		this.nomUtilisateur = nomUtilisateur;
-	}
-
-	public String getNomComplet() {
-		return nomComplet;
-	}
-
-	public void setNomComplet(String nomComplet) {
-		this.nomComplet = nomComplet;
 	}
 
 	public SecteurOrientation getOrientation() {

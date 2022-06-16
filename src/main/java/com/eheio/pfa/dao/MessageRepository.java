@@ -12,7 +12,8 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
 	
 	//afficher les message pour le conseiller  dans espace conseiller
 	  @Query(value="select * from message m where m.id_conseiller="
-	  		+      "(select id_utilisateur from conseiller where email=?1)",nativeQuery = true)
+	  		+      "(select id_utilisateur from conseiller c inner join utilisateur u"
+	  		+ "     on c.id_utilisateur=u.id where email=?1)",nativeQuery = true)
 	  public List<Message> messages(String email);
   	   
 	

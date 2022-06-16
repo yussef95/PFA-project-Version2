@@ -21,6 +21,7 @@
                     <tr th:each="pa:${profileAdmin}">
                     <td th:text="${pa.id}"></td>
                     <td th:text="${pa.nomUtilisateur}"></td>
+                    <td th:text="${pa.nomComplet}"></td>
                     <td th:text="${pa.email}"></td>
                     <td><a th:href="@{/admin/editeProfileA/{id}(id=${pa.id})}">Editer</a></td>  
                     </tr>

@@ -6,7 +6,7 @@
 <meta charset="UTF-8"/>
 <title>Editer mon profile</title>
 <style type="text/css">
-h2{
+h2,h6{
 color: blue;
 }
 label {
@@ -38,16 +38,19 @@ label {
       <span class="red" th:errors="${etudiant.nomComplet}"></span>
     </div>
     
-    <div class="form-group">
-      <label for="niveauScolaire">niveau scolaire:</label>
-      <input type="text" class="form-control" id="niveauScolaire"   th:value="${etudiant.niveauScolaire.libelle}"  name="niveauScolaire">
-      <span class="red" th:errors="${etudiant.niveauScolaire.libelle}"></span>
-    </div>
-    <div class="form-group">
-      <label for="etablissement">etablissement:</label>
-      <input type="text" class="form-control" id="etablissement"  th:value="${etudiant.etablissement.libelle}"  name="etablissement">
-      <span class="red" th:errors="${etudiant.etablissement.libelle}"></span>
-    </div>
+                            <h6>Niveau Scolaire</h6>
+                            <select th:field="*{etudiant.niveauScolaire}">
+                                <option th:each="niveauScolaire: ${niveau}" th:value="${niveauScolaire.id}" th:text="${niveauScolaire.libelle}" />
+                            </select>
+                            
+                            <br>
+                            <br>
+                            <h6>Etablissement</h6>
+                            <select th:field="*{etudiant.etablissement}">
+                                <option th:each="etablissement: ${etablissement}" th:value="${etablissement.id}" th:text="${etablissement.libelle}" />
+                            </select>
+                            <br>
+                            <br>
    
     <button type="submit" class="btn btn-primary">valider</button>
   </form>

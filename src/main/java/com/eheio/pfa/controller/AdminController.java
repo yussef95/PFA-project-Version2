@@ -138,10 +138,10 @@ public class AdminController {
 	
 	List<ListDataArticle> articles=articleRepository.ListDataArticle();
 	model.addAttribute("listearticles",articles );
-	
+	/*
 	List<ListDataCoursAll> cours=coursRepository.dataCoursAlls();
 	model.addAttribute("Cours", cours);
-	
+	*/
 	return "publicationa";
     }
     
@@ -241,7 +241,7 @@ public class AdminController {
 				Optional<Admin> adbag=adminRepository.findById(id);
 				Admin admin=adbag.get();
 				admin.setEmail(a.getEmail());
-				admin.setnomUtilisateur(a.getnomUtilisateur());
+				admin.setNomUtilisateur(a.getNomUtilisateur());
 				adminRepository.save(admin);
 				return "redirect:/admin/ProfileAdmin";
 

@@ -18,17 +18,17 @@
         <div class="container">
             <div class="row animate-box">
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                    <h2 style="color: blue;">Espace d'Authentification Admin</h2>
+                    <h2 style="color: blue;">Espace d'Authentification </h2>
                 </div>
             </div>
             <div class="row row-padded-mb">
                 <div class="col-md-4 animate-box">
                     <div class="fh5co-event">
                         <div class="container mt-3">              
-                          <form th:action="@{/admin/login}" method="POST">
+                          <form th:action="@{/user/login}" method="POST">
                            <div class="mb-3 mt-3">
                             <label for="nomUtilisateur">nomUtilisateur:</label>
-                            <input type="text" name="nomUtilisateur" required class="form-control" placeholder="Enter votre nomUtilisateur" />
+                            <input type="text" name="email" required class="form-control" placeholder="Enter votre eamil" />
                            </div>
                             <div class="mb-3">
                              <label for="password">Password:</label>
@@ -36,6 +36,8 @@
                             </div>
                                 <span th:if="${param.error}" >email ou mot de passe non valide</span>
                               <button type="submit" class="btn btn-primary">se connecter</button>
+                              <br>
+                              <span>vous n'avez pas un compte?<a th:href="@{/inscreption}">Inscrivez-vous!</a></span>
                            </form>
                          </div>
                     </div>

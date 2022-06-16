@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
@@ -18,12 +19,12 @@ public class Message implements Serializable {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotNull
+	@NotEmpty
 	private String objet;
-	@NotNull
+	@NotEmpty
 	@Column(columnDefinition = "TEXT")
 	private String description;
-	@NotNull
+	@NotEmpty
 	@Email
 	private String email;
 	

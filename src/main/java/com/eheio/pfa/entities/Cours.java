@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Cours implements Serializable {
@@ -16,8 +17,10 @@ public class Cours implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+    @NotEmpty
 	private String titre;
 	@Column(columnDefinition = "TEXT")
+	@NotEmpty
 	private String description;
 	@ManyToOne
 	@JoinColumn(name = "id_professeur")
